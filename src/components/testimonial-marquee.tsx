@@ -79,8 +79,8 @@ export default function TestimonialMarquee({ testimonials, speed = 50 }: Testimo
     return null;
   }
   
-  // Split testimonials for three rows
-  const numRows = 3;
+  // Split testimonials for a single row
+  const numRows = 1;
   const testimonialsPerRowCount = Math.ceil(testimonials.length / numRows);
   const rows = Array.from({ length: numRows }, (_, i) => {
     const start = i * testimonialsPerRowCount;

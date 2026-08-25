@@ -26,7 +26,7 @@ const MarqueeContent = ({ isLogo = false }: { isLogo?: boolean }) => {
     }
 
     return (
-        <h2 className="text-4xl md:text-5xl font-bold uppercase whitespace-nowrap text-foreground px-8">
+        <h2 className="text-4xl md:text-5xl font-bold whitespace-nowrap text-foreground px-8">
             <span className="text-primary">React</span> Developer • <span className="text-primary">Next.js</span> Expert • SEO • Digital Marketing • <span className="text-primary">Shopify</span> Developer
         </h2>
     )

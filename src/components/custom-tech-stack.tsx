@@ -227,14 +227,16 @@ export default function CustomTechStack() {
                     <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Our Custom Tech Stack</h2>
                     <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">We use a flexible and powerful stack of technologies to build scalable and robust solutions tailored to your needs.</p>
                 </div>
-                <div className="flex justify-center flex-wrap gap-2 md:gap-4 mb-8">
+                <div className="flex justify-center flex-wrap gap-3 md:gap-4 mb-8">
                     {categories.map((category) => (
                         <Button
                             key={category}
                             variant={filter === category ? "glitch" : "outline"}
+                            size="lg"
+                            showDecoration={false}
                             onClick={() => setFilter(category)}
                             className={cn(
-                                "border-primary",
+                                "border-primary px-6",
                                 filter !== category && "text-primary hover:bg-primary hover:text-primary-foreground"
                             )}
                         >

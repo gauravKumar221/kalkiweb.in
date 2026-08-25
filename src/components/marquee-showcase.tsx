@@ -18,10 +18,10 @@ const MarqueeContent = ({
 
 export default function MarqueeShowcase() {
   const backMarqueeTexts = [
-    { text: "BRAND STRATEGY", font: "font-headline" },
-    { text: "BOLD DESIGN", font: "font-headline" },
-    { text: "CODE & CREATIVITY", font: "font-headline" },
-    { text: "MARKETING MASTERY", font: "font-headline" },
+    { text: "Brand Strategy", font: "font-headline" },
+    { text: "Bold Design", font: "font-headline" },
+    { text: "Code & Creativity", font: "font-headline" },
+    { text: "Marketing Mastery", font: "font-headline" },
   ];
 
   const frontMarqueeTexts = [
@@ -40,13 +40,13 @@ export default function MarqueeShowcase() {
 
   return (
     <div
-      className="relative w-full overflow-hidden flex flex-col justify-between bg-background py-16 md:py-24 border-t border-b border-border"
+      className="relative w-full overflow-hidden flex flex-col justify-between !bg-white  py-16 md:py-24 border-t border-b border-border"
       style={{
         background: `radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.1), transparent 80%)`,
       }}
     >
       {/* Top Marquee */}
-      <div className="marquee w-full overflow-hidden whitespace-nowrap text-8xl md:text-[10rem] text-foreground font-bold z-10 py-8">
+      <div className="marquee w-full overflow-hidden whitespace-nowrap text-8xl md:text-[10rem] text-neutral-900 font-bold z-10 py-8">
         <div className="marquee-track inline-flex w-max animate-marquee-scroll">
           <div className="flex">
             {backMarqueeTexts.map((item, index) => (
@@ -66,7 +66,7 @@ export default function MarqueeShowcase() {
       </div>
 
       {/* Bottom Marquee */}
-      <div className="marquee w-full overflow-hidden whitespace-nowrap text-8xl md:text-[10rem] text-foreground font-bold z-30 py-8">
+      <div className="marquee w-full overflow-hidden whitespace-nowrap text-8xl md:text-[10rem] text-neutral-900 font-bold z-30 py-8">
         <div className="marquee-track inline-flex w-max animate-marquee-scroll">
           <MarqueeContent texts={frontMarqueeTexts} />
           <MarqueeContent texts={frontMarqueeTexts} />

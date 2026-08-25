@@ -6,25 +6,25 @@ import Link from "next/link";
 
 const courses = [
     {
-        title: "DESIGNING AI PRODUCTS",
+        title: "Designing AI Products",
         cohort: "NEXT COHORT SEP 4, 2026",
         description: "Learn the patterns, content craft, and oversight behind great AI products in this 4-week course.",
         bg: "bg-[#7a2e37]",
     },
     {
-        title: "AI PROTOTYPING CAMP",
+        title: "AI Prototyping Camp",
         cohort: "NEXT COHORT SEP 14, 2026",
         description: "Learn to prototype faster with AI. Explore leading AI tools, streamline iteration, and bring your designs to life with unprecedented speed and creativity.",
         bg: "bg-[#d67b00]",
     },
     {
-        title: "AI-DRIVEN DESIGN SYSTEMS",
+        title: "AI-Driven Design Systems",
         cohort: "NEXT COHORT OCT 2, 2026",
         description: "Master the integration of AI tools within design systems, automating workflows and generating component variations at scale.",
         bg: "bg-[#1f4e43]",
     },
     {
-        title: "PRODUCT DESIGN LEADERSHIP",
+        title: "Product Design Leadership",
         cohort: "NEXT COHORT OCT 15, 2026",
         description: "Lead design teams in the age of AI. Learn to align creative vision with product execution and scale AI-native experiences.",
         bg: "bg-[#183059]",
@@ -94,7 +94,7 @@ export default function DesignTrainingSection() {
                             >
                                 <div className={`${course.bg} rounded-[2rem] p-8 md:p-12 text-white h-[420px] md:h-[450px] flex flex-col justify-between shadow-xl`}>
                                     <div>
-                                        <h3 className="text-2xl md:text-3xl font-black tracking-tight uppercase border-b border-white/20 pb-4 mb-4">
+                                        <h3 className="text-2xl md:text-3xl font-black tracking-tight border-b border-white/20 pb-4 mb-4">
                                             {course.title}
                                         </h3>
                                         <div className="inline-block bg-white text-black border border-neutral-200 text-xs font-bold px-3 py-1.5 rounded-full mb-6">

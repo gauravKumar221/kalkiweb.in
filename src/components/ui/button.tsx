@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        glitch: "group border border-primary text-primary-foreground uppercase bg-primary text-primary-foreground focus:bg-primary focus:text-primary-foreground active:bg-transparent active:text-primary active:before:hidden active:after:hidden",
+        glitch: "group border border-primary text-primary-foreground bg-primary text-primary-foreground focus:bg-primary focus:text-primary-foreground active:bg-transparent active:text-primary active:before:hidden active:after:hidden",
         shiny: "bg-white text-black hover:bg-gray-200 shadow-sm"
       },
       size: {
@@ -39,26 +39,52 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  asChild?: boolean,
-  glitchText?: string
+  asChild?: boolean;
+  glitchText?: string;
+  showDecoration?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, glitchText, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, glitchText, showDecoration = true, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
     if (variant === 'glitch') {
+      const content = (
+        <span className="group-hover:animate-glitch group-focus:animate-glitch pointer-events-none">
+           <span className="text">{glitchText || (asChild && React.isValidElement(children) ? (children as React.ReactElement<any>).props.children : children)}</span>
+           {showDecoration && (
+             <>
+               <span className="text-decoration animate-blink"> _</span>
+               <span className="decoration animate-blink">⇒</span>
+             </>
+           )}
+        </span>
+      );
+
+      if (asChild && React.isValidElement(children)) {
+        const child = children as React.ReactElement<any>;
+        return (
+          <Comp
+            className={cn(buttonVariants({ variant, size, className }), "group")}
+            ref={ref}
+            {...props}
+          >
+            {React.cloneElement(
+              child,
+              child.props,
+              content
+            )}
+          </Comp>
+        )
+      }
+
       return (
         <Comp
           className={cn(buttonVariants({ variant, size, className }))}
           ref={ref}
           {...props}
         >
-          <span className="group-hover:animate-glitch group-focus:animate-glitch">
-             <span className="text">{glitchText || children}</span>
-             <span className="text-decoration animate-blink"> _</span>
-             <span className="decoration animate-blink">⇒</span>
-          </span>
+          {content}
         </Comp>
       )
     }

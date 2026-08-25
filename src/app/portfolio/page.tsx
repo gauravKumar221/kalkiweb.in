@@ -15,8 +15,8 @@ export default function PortfolioPage() {
     return (
         <div>
             {/* Hero Section */}
-            <section className="relative py-24 md:py-40 text-center bg-muted border-b border-border">
-                <div className="absolute inset-0 bg-grid-black/[0.05] z-0"></div>
+            <section className="relative py-24 md:py-40 text-center bg-black">
+                <div className="absolute inset-0 bg-grid-white/[0.05] z-0"></div>
                 <div className="container relative z-10">
                     <div className="flex justify-center items-center">
                         <motion.div

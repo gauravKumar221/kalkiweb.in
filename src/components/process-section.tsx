@@ -3,8 +3,8 @@
 
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardHeader } from "./ui/card";
-import { Search, LayoutTemplate, Code, Server, FileText, ShieldCheck, Rocket, Wrench } from "lucide-react";
-import React, { useRef, useEffect } from "react";
+import { Search, LayoutTemplate, Code, Server, FileText, ShieldCheck, Rocket, Wrench, ArrowLeft, ArrowRight } from "lucide-react";
+import React, { useRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const processSteps = [
@@ -68,12 +68,29 @@ const processSteps = [
 
 export default function ProcessSection() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const checkScroll = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            setCanScrollLeft(scrollLeft > 10);
+            setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
+        }
+    };
+
+    const scroll = (direction: "left" | "right") => {
+        if (scrollContainerRef.current) {
+            const { clientWidth } = scrollContainerRef.current;
+            const scrollAmount = direction === "left" ? -clientWidth * 0.8 : clientWidth * 0.8;
+            scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+    };
 
     useEffect(() => {
         const scrollContainer = scrollContainerRef.current;
         if (scrollContainer) {
             const handleWheel = (evt: WheelEvent) => {
-                // Prevent vertical scroll while scrolling horizontally
                 if (Math.abs(evt.deltaY) > Math.abs(evt.deltaX)) {
                     return;
                 }
@@ -82,8 +99,14 @@ export default function ProcessSection() {
             };
 
             scrollContainer.addEventListener('wheel', handleWheel);
+            scrollContainer.addEventListener('scroll', checkScroll);
+            checkScroll();
+            window.addEventListener('resize', checkScroll);
+
             return () => {
                 scrollContainer.removeEventListener('wheel', handleWheel);
+                scrollContainer.removeEventListener('scroll', checkScroll);
+                window.removeEventListener('resize', checkScroll);
             };
         }
     }, []);
@@ -91,15 +114,33 @@ export default function ProcessSection() {
     return (
         <section className="w-full py-16 md:py-24 bg-background">
             <div className="container mx-auto">
-                <div className="md:grid md:grid-cols-12 md:gap-8 mb-12">
+                <div className="md:grid md:grid-cols-12 md:gap-8 mb-12 items-end">
                     <div className="md:col-span-4">
-                         <Badge variant="outline" className="mb-4 text-primary border-primary">Process</Badge>
+                        <Badge variant="outline" className="mb-4 text-primary border-primary">Process</Badge>
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">From Idea to Impact</h2>
                     </div>
-                    <div className="md:col-span-8">
-                        <p className="mt-4 text-lg text-muted-foreground md:text-xl">
+                    <div className="md:col-span-8 flex flex-col md:flex-row justify-between items-end gap-6">
+                        <p className="text-lg text-muted-foreground md:text-xl max-w-xl">
                            Our web development process is designed to be transparent, collaborative, and efficient. We follow a structured approach to ensure we deliver a high-quality product that meets your expectations and drives results.
                         </p>
+                        <div className="flex gap-2 shrink-0">
+                            <button
+                                onClick={() => scroll("left")}
+                                disabled={!canScrollLeft}
+                                className={`w-10 h-10 rounded-full flex items-center justify-center border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 ${!canScrollLeft ? "opacity-30 cursor-not-allowed" : "hover:scale-105"}`}
+                                aria-label="Scroll left"
+                            >
+                                <ArrowLeft className="w-5 h-5" />
+                            </button>
+                            <button
+                                onClick={() => scroll("right")}
+                                disabled={!canScrollRight}
+                                className={`w-10 h-10 rounded-full flex items-center justify-center border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 ${!canScrollRight ? "opacity-30 cursor-not-allowed" : "hover:scale-105"}`}
+                                aria-label="Scroll right"
+                            >
+                                <ArrowRight className="w-5 h-5" />
+                            </button>
+                        </div>
                     </div>
                 </div>
 

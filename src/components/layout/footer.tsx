@@ -26,14 +26,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           <div className="space-y-4">
-            <h4 className="font-bold text-foreground text-xl mb-4">Our Company</h4>
+            <h3 className="font-bold text-foreground text-xl mb-4">Our Company</h3>
             <p className="text-sm">
               Kalki Web, we provide high-quality services designed to meet your specific needs. As the Best marketing agency in Patna, your satisfaction is our top priority, and we work hard to exceed your expectations.
             </p>
           </div>
           
           <div>
-            <h4 className="font-bold text-foreground text-xl mb-4">Services</h4>
+            <h3 className="font-bold text-foreground text-xl mb-4">Services</h3>
             <ul className="space-y-3 text-sm">
               {servicesLinks.map((link) => (
                 <li key={link.name}>
@@ -46,7 +46,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-foreground text-xl mb-4">Contact Detail</h4>
+            <h3 className="font-bold text-foreground text-xl mb-4">Contact Detail</h3>
             <div className="space-y-4 text-sm">
                 <p>Feel free to contact & reach us !</p>
                 <div className="flex items-start gap-3">
@@ -65,7 +65,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold text-foreground text-xl mb-4">Quick Links</h4>
+            <h3 className="font-bold text-foreground text-xl mb-4">Quick Links</h3>
             <ul className="space-y-3 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.name}>
