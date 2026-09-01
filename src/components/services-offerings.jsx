@@ -1,8 +1,7 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
-  ChevronLeft,
-  ChevronRight,
   Megaphone,
   MonitorSmartphone,
   GanttChartSquare,
@@ -15,7 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import Link from "next/link";
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -25,8 +24,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Image from "next/image";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import Marquee from "react-fast-marquee";
+
 const AdsIcon = (props) => (
   <svg
     {...props}
@@ -47,6 +46,7 @@ const AdsIcon = (props) => (
     <path d="M9.5 9.5c1.5 1.5 1.5 4 0 5.5s-4 0-5.5 0" />
   </svg>
 );
+
 const PerformanceIcon = (props) => (
   <svg
     {...props}
@@ -65,6 +65,7 @@ const PerformanceIcon = (props) => (
     <path d="M16 12h-4v-4" />
   </svg>
 );
+
 const CMSIcon = (props) => (
   <svg
     {...props}
@@ -89,6 +90,7 @@ const CMSIcon = (props) => (
     <circle cx="12" cy="12" r="3" />
   </svg>
 );
+
 const ShopifyIcon = (props) => (
   <svg
     {...props}
@@ -102,6 +104,7 @@ const ShopifyIcon = (props) => (
     />
   </svg>
 );
+
 const WordpressIcon = (props) => (
   <svg
     {...props}
@@ -115,6 +118,7 @@ const WordpressIcon = (props) => (
     />
   </svg>
 );
+
 const marketingServices = [
   {
     icon: <Megaphone />,
@@ -128,7 +132,7 @@ const marketingServices = [
       "High-Authority Link Building Campaigns",
       "Local & International Search Optimization",
     ],
-    image: "https://picsum.photos/seed/organic700/900/600",
+    image: "/illustrations/seo_search_results.jpg",
     link: "/services/digital-marketing",
   },
   {
@@ -143,7 +147,7 @@ const marketingServices = [
       "LinkedIn B2B Lead Generation Campaigns",
       "High-ROAS Retargeting & Omnichannel Strategy",
     ],
-    image: "https://picsum.photos/seed/ads700/900/600",
+    image: "/Kalkimarketing/ChatGPT Image Jun 25, 2026, 01_06_58 PM 1.png",
     link: "/services/digital-marketing",
   },
   {
@@ -158,7 +162,7 @@ const marketingServices = [
       "Automated Nurturing Email Sequences",
       "Seamless CRM & Sales Pipeline Integration",
     ],
-    image: "https://picsum.photos/seed/leads700/900/600",
+    image: "/illustrations/team_collaboration.jpg",
     link: "/services/digital-marketing",
   },
   {
@@ -173,7 +177,7 @@ const marketingServices = [
       "Community Engagement & Brand Reputation",
       "Social Commerce & Multi-Platform Growth",
     ],
-    image: "https://picsum.photos/seed/social700/900/600",
+    image: "/Kalkimarketing/ChatGPT Image Jun 25, 2026, 01_55_04 PM 1.png",
     link: "/services/digital-marketing",
   },
   {
@@ -188,7 +192,7 @@ const marketingServices = [
       "Full-Funnel Attribution Modeling & Tracking",
       "Dynamic Profit & ROAS Scalability Roadmaps",
     ],
-    image: "https://picsum.photos/seed/perf700/900/600",
+    image: "/illustrations/user_conversion.jpg",
     link: "/services/digital-marketing",
   },
   {
@@ -203,14 +207,15 @@ const marketingServices = [
       "Interactive Case Studies & Whitepapers",
       "Multi-Channel Repurposing Frameworks",
     ],
-    image: "https://picsum.photos/seed/content700/900/600",
+    image: "/illustrations/design_audience_steps.jpg",
     link: "/services/digital-marketing",
   },
 ];
+
 const webDevServices = [
   {
     icon: <CMSIcon />,
-    name: "CMS Development",
+    name: "CMS & Web Architecture",
     category: "Content Platforms",
     description:
       "Manage, publish, and scale your content seamlessly with flexible headless CMS platforms.",
@@ -220,7 +225,7 @@ const webDevServices = [
       "Blazing Fast Server-Side Rendering (SSR)",
       "Role-Based Access & Editorial Workflow",
     ],
-    image: "https://picsum.photos/seed/cms700/900/600",
+    image: "/illustrations/server_performance.jpg",
     link: "/services/web-development",
   },
   {
@@ -235,12 +240,12 @@ const webDevServices = [
       "Real-Time Inventory & ERP Integrations",
       "Mobile-First Speed & Performance Optimization",
     ],
-    image: "https://picsum.photos/seed/ecom700/900/600",
+    image: "/illustrations/user_conversion.jpg",
     link: "/services/ecommerce",
   },
   {
     icon: <GanttChartSquare />,
-    name: "Landing Pages",
+    name: "High-CRO Landing Pages",
     category: "High Conversion",
     description:
       "Lightning-fast, visually captivating landing pages designed specifically for marketing ROI.",
@@ -250,7 +255,7 @@ const webDevServices = [
       "A/B Testing & Micro-Interaction Animations",
       "Comprehensive Heatmap & Conversion Tracking",
     ],
-    image: "https://picsum.photos/seed/landing700/900/600",
+    image: "/illustrations/team_collaboration.jpg",
     link: "/services/web-development",
   },
   {
@@ -265,7 +270,7 @@ const webDevServices = [
       "Scalable Cloud Backend & REST/GraphQL APIs",
       "App Store & Google Play Launch Deployment",
     ],
-    image: "https://picsum.photos/seed/app700/900/600",
+    image: "/illustrations/design_audience_steps.jpg",
     link: "/services/mobile-app-development",
   },
   {
@@ -280,7 +285,7 @@ const webDevServices = [
       "Smooth Platform & Data Migration",
       "Speed Optimization & High-Traffic Stability",
     ],
-    image: "https://picsum.photos/seed/shopify700/900/600",
+    image: "/illustrations/seo_search_results.jpg",
     link: "/services/shopify-development",
   },
   {
@@ -295,239 +300,147 @@ const webDevServices = [
       "Hardened Security & Malware Defense",
       "Database Tuning & Global CDN Integration",
     ],
-    image: "https://picsum.photos/seed/wp700/900/600",
+    image: "/illustrations/cyber_security.jpg",
     link: "/services/web-development",
   },
 ];
-function ServiceCenterCarousel({
+
+function ServiceMarqueeSection({
   services,
   title,
   subtitle,
-  ctaText,
-  ctaLink,
+  direction = "left",
+  speed = 35,
 }) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: "center",
-      skipSnaps: false,
-    },
-    [
-      Autoplay({
-        delay: 4500,
-        stopOnInteraction: false,
-        stopOnMouseEnter: true,
-      }),
-    ],
-  );
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-  const scrollTo = useCallback(
-    (index) => {
-      if (emblaApi) emblaApi.scrollTo(index);
-    },
-    [emblaApi],
-  );
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-      emblaApi.off("reInit", onSelect);
-    };
-  }, [emblaApi, onSelect]);
   return (
     <div className="space-y-6">
       {/* Category Header */}
-      <div className=" px-4 md:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-border">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-mono tracking-widest text-primary uppercase">
-                Featured Capabilities
-              </span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+      <div className="px-4 md:px-8  mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-border">
+          <div className="space-y-2 text-left">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
               {title}
             </h3>
-            <p className="text-sm text-muted-foreground max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
               {subtitle}
             </p>
           </div>
-
-          <div className="flex items-center gap-4">
-            {/* Custom Carousel Arrows */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={scrollPrev}
-                aria-label="Previous Slide"
-                className="w-10 h-10 rounded-full border border-border bg-card/80 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 flex items-center justify-center text-foreground backdrop-blur-md shadow-sm active:scale-95"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={scrollNext}
-                aria-label="Next Slide"
-                className="w-10 h-10 rounded-full border border-border bg-card/80 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 flex items-center justify-center text-foreground backdrop-blur-md shadow-sm active:scale-95"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* 700px Center Active Scale Carousel Track */}
-      <div className="w-full overflow-hidden py-8 select-none" ref={emblaRef}>
-        <div className="flex items-center">
-          {services.map((service, index) => {
-            const isActive = index === selectedIndex;
-            return (
-              <div
-                key={index}
-                className="flex-[0_0_auto] px-3 sm:px-4 cursor-pointer"
-                onClick={() => {
-                  if (!isActive) scrollTo(index);
-                }}
-              >
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div
-                      className={`relative w-[85vw] sm:w-[580px] md:w-[680px] lg:w-[700px] h-[380px] sm:h-[430px] md:h-[460px] rounded-3xl overflow-hidden transition-all duration-500 ease-out border ${
-                        isActive
-                          ? "scale-100 md:scale-105 opacity-100 z-20 border-primary/60 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_35px_rgba(250,204,21,0.2)] ring-1 ring-primary/40"
-                          : "scale-90 md:scale-[0.88] opacity-40 hover:opacity-75 z-10 border-white/10 grayscale-[20%]"
-                      }`}
+      {/* Infinite Horizontal Marquee */}
+      <div className="w-full relative [mask-image:linear-gradient(90deg,transparent,white_3%,white_97%,transparent)] py-4">
+        <Marquee
+          speed={speed}
+          direction={direction}
+          gradient={false}
+          pauseOnHover={true}
+          className="py-2"
+        >
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[300px]  sm:w-[420px] md:w-[460px] mx-3 sm:mx-4 group cursor-pointer select-none"
+            >
+              <Dialog>
+                <DialogTrigger asChild>
+                  <div className="relative w-full h-[400px] sm:h-[300px] md:h-[487px] rounded-3xl  overflow-hidden transition-all duration-500 ease-out border border-white/10 group-hover:border-primary/60 shadow-xl group-hover:shadow-2xl group-hover:shadow-primary/10">
+                    {/* Background Image with Zoom on Hover */}
+                    <Image
+                      src={service.image}
+                      alt={service.name}
+                      fill
+                      unoptimized
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+
+                    {/* Multi-Stop Cinematic Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/25" />
+
+                    {/* Bottom Content Area */}
+                    <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-7 flex flex-col justify-end text-left space-y-2.5 z-10">
+                      {/* Title */}
+                      <h4 className="text-xl sm:text-2xl md:text-3xl font-black text-white group-hover:text-primary transition-colors tracking-tight leading-tight">
+                        {service.name}
+                      </h4>
+
+                      {/* Action Bar */}
+                      <div className="pt-1.5 flex items-center justify-between">
+                        <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5 group-hover:underline">
+                          View Service Details
+                          <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </DialogTrigger>
+
+                {/* Modal Dialog for Full Service Info */}
+                <DialogContent className="sm:max-w-[550px] bg-neutral-950 text-white border border-white/15 shadow-2xl">
+                  <DialogHeader className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-semibold text-primary uppercase tracking-wider">
+                        {service.category}
+                      </span>
+                    </div>
+                    <DialogTitle className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+                      {service.name}
+                    </DialogTitle>
+                    <DialogDescription className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+                      {service.description}
+                    </DialogDescription>
+                  </DialogHeader>
+
+                  <div className="space-y-4 py-2">
+                    <h5 className="text-xs font-bold tracking-wider uppercase text-neutral-400">
+                      Key Deliverables & Highlights
+                    </h5>
+                    <ul className="grid grid-cols-1 gap-2.5">
+                      {service.details.map((detail, dIdx) => (
+                        <li
+                          key={dIdx}
+                          className="flex items-start gap-3 text-xs sm:text-sm text-gray-200 bg-white/5 p-2.5 rounded-xl border border-white/10"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                          <span>{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
+                    <Button
+                      asChild
+                      variant="glitch"
+                      className="w-full text-black font-semibold"
                     >
-                      {/* Background Image with Zoom on Hover */}
-                      <Image
-                        src={service.image}
-                        alt={service.name}
-                        fill
-                        priority={index === 0}
-                        className={`object-cover transition-transform duration-700 ${isActive ? "scale-100 group-hover:scale-105" : "scale-105"}`}
-                      />
-
-                      {/* Multi-Stop Cinematic Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-black/20" />
-
-                      {/* Top Badges & Category Header */}
-                      <div className="absolute top-5 left-6 right-6 flex items-center justify-between z-10">
-                        {/* Interactive Active Icon */}
-                      </div>
-
-                      {/* Bottom Content Area */}
-                      <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 md:p-10 flex flex-col justify-end text-left space-y-3 sm:space-y-4 z-10">
-                        {/* Title */}
-                        <h4 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
-                          {service.name}
-                        </h4>
-
-                        {/* Action Bar */}
-                        <div className="pt-2 flex items-center justify-between">
-                          <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary flex items-center gap-2 group-hover:underline">
-                            View Service Details
-                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-
-                  {/* Modal Dialog for Full Service Info */}
-                  <DialogContent className="sm:max-w-[550px] bg-neutral-950 text-white border border-white/15 shadow-2xl">
-                    <DialogHeader>
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="p-3 bg-primary/20 text-primary rounded-xl border border-primary/30">
-                          {React.cloneElement(service.icon, {
-                            className: "w-6 h-6",
-                          })}
-                        </div>
-                        <div>
-                          <span className="text-xs font-mono text-primary uppercase tracking-widest">
-                            {service.category}
-                          </span>
-                          <DialogTitle className="text-2xl sm:text-3xl font-bold text-white">
-                            {service.name}
-                          </DialogTitle>
-                        </div>
-                      </div>
-                      <DialogDescription className="text-gray-300 text-sm sm:text-base leading-relaxed pt-2">
-                        {service.description}
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="py-4 space-y-4">
-                      <h5 className="text-xs font-mono uppercase tracking-wider text-gray-400">
-                        What's Included
-                      </h5>
-                      <ul className="space-y-2.5">
-                        {service.details.map((detail, dIdx) => (
-                          <li
-                            key={dIdx}
-                            className="flex items-start gap-3 text-sm text-gray-200 bg-white/5 p-2.5 rounded-xl border border-white/10"
-                          >
-                            <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="pt-2 flex gap-3">
-                      <Button
-                        asChild
-                        variant="glitch"
-                        className="w-full text-black font-semibold"
-                      >
-                        <Link href="/contact">
-                          Get Started With {service.name}
-                        </Link>
-                      </Button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Pagination Dots */}
-      <div className="flex justify-center items-center gap-2 pt-2">
-        {services.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => scrollTo(index)}
-            aria-label={`Go to slide ${index + 1}`}
-            className={`transition-all duration-300 rounded-full ${
-              index === selectedIndex
-                ? "w-8 h-2.5 bg-primary"
-                : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
-            }`}
-          />
-        ))}
+                      <Link href="/contact">
+                        Get Started With {service.name}
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full border-white/20 text-white hover:bg-white hover:text-black"
+                    >
+                      <Link href={service.link}>Explore Full Service</Link>
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+          ))}
+        </Marquee>
       </div>
     </div>
   );
 }
+
 export default function ServicesOfferings() {
   return (
     <section className="py-16 md:py-24 bg-background text-foreground overflow-hidden border-t border-b border-border">
       {/* Title block */}
-      <div className=" px-4 md:px-8 mb-16 text-center space-y-4">
+      <div className="px-4 md:px-8 mb-12 md:mb-16 text-center space-y-4 max-w-4xl mx-auto">
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter">
           Services <span className="text-primary">We Offer</span>
         </h2>
@@ -537,23 +450,14 @@ export default function ServicesOfferings() {
         </p>
       </div>
 
-      <div className="space-y-24">
-        {/* Marketing Section 700px Scaling Carousel */}
-        <ServiceCenterCarousel
+      <div className="space-y-16 md:space-y-20">
+        {/* Track 1: Marketing & Acquisition */}
+        <ServiceMarqueeSection
           services={marketingServices}
           title="Marketing & Acquisition"
           subtitle="Boost your brand presence, acquire high-value customers, and maximize ROAS with data-backed campaigns."
-          ctaText="Explore Marketing"
-          ctaLink="/services/digital-marketing"
-        />
-
-        {/* Web Development Section 700px Scaling Carousel */}
-        <ServiceCenterCarousel
-          services={webDevServices}
-          title="Engineering & Web Development"
-          subtitle="Build ultra-fast, secure, and highly scalable custom web applications and e-commerce platforms."
-          ctaText="Explore Development"
-          ctaLink="/services/web-development"
+          direction="left"
+          speed={35}
         />
       </div>
     </section>
