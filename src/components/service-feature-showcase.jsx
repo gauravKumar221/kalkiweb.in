@@ -39,12 +39,7 @@ export default function ServiceFeatureShowcase({
         )}
 
         {/* 2-Column Showcase Grid */}
-        <div
-          className={cn(
-            "grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center",
-            reverse && "md:[&>*:first-child]:order-2 md:[&>*:last-child]:order-1"
-          )}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
           {/* Left: 600x500 Showcase Image Slider with active zoom and link support */}
           <div className="flex justify-center w-full">
             <ShowcaseImageSlider slides={slides} />

@@ -9,8 +9,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ['"Reddit Sans"', 'Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        sans: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        body: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        headline: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'Poppins', 'sans-serif'],
         kalam: ['var(--font-kalam)', 'cursive'],
         code: ['monospace'],
       },
