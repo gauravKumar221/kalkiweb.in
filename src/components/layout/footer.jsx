@@ -14,7 +14,8 @@ const servicesLinks = [
 const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About us", href: "/about" },
-    { name: "Blogs", href: "#" },
+    { name: "Meet Our Team", href: "/team" },
+    { name: "Blogs", href: "/blog" },
     { name: "Contact Us", href: "/contact" },
 ];
 export function Footer() {

@@ -5,6 +5,7 @@ import React from "react";
 import HeroMarquee from "@/components/hero-marquee";
 import ServicesOfferings from "@/components/services-offerings";
 import { Globe } from "@/components/magicui/globe";
+import ExpertiseShowcase from "@/components/expertise-showcase";
 
 // Below-the-fold dynamically imported components to maximize initial load performance
 const TestimonialMarquee = dynamic(
@@ -189,6 +190,8 @@ export default function Home() {
           </div>
 
           <ProcessSection />
+
+          <ExpertiseShowcase videoSrc="/videoservices/kalkiman.mp4" />
 
           <section id="testimonials" className="w-full py-16 md:py-24">
             <div className="container">

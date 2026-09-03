@@ -297,9 +297,12 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div>
+            <div className="flex items-center gap-3">
               <Button asChild variant="glitch" size="lg" className="rounded-full">
-                <Link href="/careers">Join Our Team</Link>
+                <Link href="/team">Meet All Team</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full border-white/20 text-white hover:bg-white hover:text-black">
+                <Link href="/careers">Careers</Link>
               </Button>
             </div>
           </div>

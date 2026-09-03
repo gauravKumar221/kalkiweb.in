@@ -38,11 +38,12 @@ const menuMainLinks = [
   { href: "/", label: "Home", num: "(01)" },
   { href: "/about", label: "About", num: "(02)" },
   { href: "/services", label: "Services", num: "(03)", isSubmenu: true },
-  { href: "/portfolio", label: "Portfolio", num: "(04)" },
-  { href: "/case-studies", label: "Case Studies", num: "(05)" },
-  { href: "/pricing", label: "Pricing", num: "(06)" },
-  { href: "/blog", label: "Blog", num: "(07)" },
-  { href: "/contact", label: "Contact Us", num: "(08)" },
+  { href: "/team", label: "Meet Our Team", num: "(04)" },
+  { href: "/portfolio", label: "Portfolio", num: "(05)" },
+  { href: "/case-studies", label: "Case Studies", num: "(06)" },
+  { href: "/pricing", label: "Pricing", num: "(07)" },
+  { href: "/blog", label: "Blog", num: "(08)" },
+  { href: "/contact", label: "Contact Us", num: "(09)" },
 ];
 
 // All individual service sub-pages with icons & descriptions

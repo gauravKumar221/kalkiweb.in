@@ -10,8 +10,8 @@ const solutions = [
     image: "https://picsum.photos/800/450?random=1",
     hint: "team meeting discussion",
     href: "#",
-    colorClass: "from-emerald-950/40 via-neutral-950 to-black",
-    accentColor: "emerald",
+    colorClass: "",
+    accentColor: "",
   },
   {
     title: "Content Creation & Copywriting",
@@ -20,8 +20,8 @@ const solutions = [
     image: "https://picsum.photos/800/450?random=2",
     hint: "writing content creation",
     href: "#",
-    colorClass: "from-blue-950 via-neutral-950 to-black",
-    accentColor: "blue",
+    colorClass: "",
+    accentColor: "",
   },
   {
     title: "Marketing & Advertising",
@@ -30,7 +30,7 @@ const solutions = [
     image: "https://picsum.photos/800/450?random=3",
     hint: "marketing charts",
     href: "#",
-    colorClass: "from-indigo-950 via-neutral-950 to-black",
+    colorClass: "",
     accentColor: "indigo",
   },
   {
@@ -40,8 +40,8 @@ const solutions = [
     image: "https://picsum.photos/800/450?random=4",
     hint: "design branding",
     href: "#",
-    colorClass: "from-violet-950/40 via-violet-950 to-violet-950",
-    accentColor: "violet",
+    colorClass: "",
+    accentColor: "",
   },
   {
     title: "Event Management",
@@ -50,7 +50,7 @@ const solutions = [
     image: "https://picsum.photos/800/450?random=5",
     hint: "corporate event",
     href: "#",
-    colorClass: "from-rose-950 via-neutral-950 to-black",
+    colorClass: "",
     accentColor: "rose",
   },
   {
@@ -60,8 +60,8 @@ const solutions = [
     image: "https://picsum.photos/800/450?random=6",
     hint: "business handshake",
     href: "#",
-    colorClass: "from-red-950/40 via-red-950 to-red-950",
-    accentColor: "red",
+    colorClass: "",
+    accentColor: "",
   },
 ];
 export default function B2BDisruptiveTech() {
@@ -87,10 +87,10 @@ export default function B2BDisruptiveTech() {
           <article
             key={index}
             id={`solution-panel-${index}`}
-            className={`sticky top-0 h-screen w-full flex items-center justify-center bg-neutral-950 bg-gradient-to-br ${solution.colorClass} border-t border-white/10 shadow-[0_-20px_50px_rgba(0,0,0,0.85)] overflow-hidden`}
+            className={`sticky top-0 h-[80vh] w-full flex items-center justify-center bg-neutral-950 bg-gradient-to-br ${solution.colorClass}   overflow-hidden`}
             style={{ zIndex: index + 10, isolation: "isolate" }}
           >
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 w-full h-full p-6 md:p-20 max-w-7xl mx-auto pt-24 lg:pt-0">
+            <div className="flex flex-col lg:flex-row items-center md:justify-center justify-start gap-8 md:gap-16 w-full h-full p-6 md:p-20 max-w-7xl mx-auto pt-24 lg:pt-0">
               {/* Image Frame */}
               <div className="w-full lg:w-1/2 h-[35vh] lg:h-[55vh] relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
                 <Image

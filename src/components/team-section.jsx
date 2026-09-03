@@ -50,8 +50,8 @@ export default function TeamSection() {
             </p>
             <div className="flex justify-start md:justify-end">
               <Button asChild variant="secondary" className="rounded-full h-12 px-2">
-                <Link href="/about" className="flex items-center">
-                  <span className="px-4">Team</span>
+                <Link href="/team" className="flex items-center">
+                  <span className="px-4">Meet All Team</span>
                   <div className="bg-primary text-primary-foreground rounded-full w-8 h-8 flex items-center justify-center">
                     <ArrowUpRight className="w-5 h-5"/>
                   </div>
