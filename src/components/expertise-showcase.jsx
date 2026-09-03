@@ -38,11 +38,10 @@ const ExpertiseShowcase = ({ videoSrc = "/videoservices/kalkiman.mp4" }) => {
       </video>
 
       {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-grid-white/[0.03] z-10 pointer-events-none" />
 
+      <div className="absolute inset-0 bg-grid-white/[0.03] z-10 pointer-events-none" />
       {/* Subtle Vignette for contrast */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/60 z-10 pointer-events-none" />
-
       <div className="container relative z-20 mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Optional inner content container */}

@@ -60,15 +60,13 @@ export default function CaseStudiesPage() {
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-24 overflow-hidden border-b border-border/40">
         <div className="absolute inset-0 bg-grid-white/[0.03] pointer-events-none" />
         <div className="container relative z-10 max-w-6xl mx-auto px-4 md:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs md:text-sm font-semibold uppercase tracking-wider mb-6">
-            <Sparkles className="w-4 h-4" />
-            <span>Proven Success Stories</span>
-          </div>
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
             Our Case Studies
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Discover how Kalki Web helps ambitious enterprises and high-growth brands architect transformative digital experiences, scale revenue, and dominate search rankings.
+            Discover how Kalki Web helps ambitious enterprises and high-growth
+            brands architect transformative digital experiences, scale revenue,
+            and dominate search rankings.
           </p>
         </div>
       </section>
@@ -154,7 +152,8 @@ export default function CaseStudiesPage() {
               Ready to create your success story?
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base">
-              Let's build, optimize, and market your next big digital product together.
+              Let's build, optimize, and market your next big digital product
+              together.
             </p>
             <div>
               <Button asChild size="lg" variant="glitch">

@@ -2,7 +2,14 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { CheckCircle2, Sparkles, ArrowRight, Zap, Shield, Rocket } from "lucide-react";
+import {
+  CheckCircle2,
+  Sparkles,
+  ArrowRight,
+  Zap,
+  Shield,
+  Rocket,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const pricingPlans = [
@@ -85,15 +92,12 @@ export default function PricingPage() {
       <section className="relative pt-36 pb-16 md:pt-44 md:pb-24 overflow-hidden border-b border-border/40">
         <div className="absolute inset-0 bg-grid-white/[0.03] pointer-events-none" />
         <div className="container relative z-10 max-w-5xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs md:text-sm font-semibold uppercase tracking-wider mb-6">
-            <Sparkles className="w-4 h-4" />
-            <span>Transparent Investment</span>
-          </div>
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
             Simple, Scalable Pricing
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Choose the perfect engagement model to build, launch, and scale your digital products with guaranteed delivery speed.
+            Choose the perfect engagement model to build, launch, and scale your
+            digital products with guaranteed delivery speed.
           </p>
         </div>
       </section>
@@ -141,7 +145,10 @@ export default function PricingPage() {
                       Included in Plan:
                     </span>
                     {plan.features.map((feature, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-3 text-xs sm:text-sm text-neutral-200">
+                      <div
+                        key={fIdx}
+                        className="flex items-start gap-3 text-xs sm:text-sm text-neutral-200"
+                      >
                         <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </div>
@@ -155,7 +162,9 @@ export default function PricingPage() {
                     size="lg"
                     variant={plan.popular ? "glitch" : "outline"}
                     className={`w-full font-bold cursor-pointer ${
-                      plan.popular ? "text-black" : "text-white hover:bg-white hover:text-black"
+                      plan.popular
+                        ? "text-black"
+                        : "text-white hover:bg-white hover:text-black"
                     }`}
                   >
                     <Link href="/contact">{plan.cta}</Link>

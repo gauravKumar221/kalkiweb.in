@@ -161,9 +161,9 @@ export default function AboutPage() {
                 Transform your Business.
               </h1>
               <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed font-normal">
-                We are a modern creative technology agency blending bold
-                visual design, full-stack engineering, and data-driven marketing
-                to build brands that dominate their industries.
+                We are a modern creative technology agency blending bold visual
+                design, full-stack engineering, and data-driven marketing to
+                build brands that dominate their industries.
               </p>
               <div className="pt-2 flex items-center gap-3">
                 <Button
@@ -217,16 +217,13 @@ export default function AboutPage() {
       <section className="py-20 md:py-28 bg-neutral-950/80 border-b border-border/40 relative">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest backdrop-blur-md">
-              <Target className="w-3.5 h-3.5" />
-              <span>Our Core Priorities</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
               The Guiding Priorities Behind Every Project
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               We uphold rigorous engineering and strategic standards to ensure
-              unrivaled performance, measurable ROI, and seamless client collaboration.
+              unrivaled performance, measurable ROI, and seamless client
+              collaboration.
             </p>
           </div>
 
@@ -281,13 +278,9 @@ export default function AboutPage() {
 
       {/* 3. Our Team Carousel / Marquee Section ("Our Teams") */}
       <section className="py-20 md:py-28 overflow-hidden bg-background border-b border-border/40">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="  mx-auto px-4 sm:px-6 lg:px-8 mb-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-border/40 text-left">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest">
-                <Users className="w-3.5 h-3.5" />
-                <span>Meet Our Team</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
                 The Minds Shaping Your Digital Future
               </h2>
@@ -298,10 +291,20 @@ export default function AboutPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <Button asChild variant="glitch" size="lg" className="rounded-full">
+              <Button
+                asChild
+                variant="glitch"
+                size="lg"
+                className="rounded-full"
+              >
                 <Link href="/team">Meet All Team</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full border-white/20 text-white hover:bg-white hover:text-black">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="rounded-full border-white/20 text-white hover:bg-white hover:text-black"
+              >
                 <Link href="/careers">Careers</Link>
               </Button>
             </div>
@@ -351,12 +354,12 @@ export default function AboutPage() {
       </section>
 
       {/* 4. Bottom CTA Section */}
-      <section className="py-20 md:py-28 bg-neutral-950 text-center relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-white text-center relative overflow-hidden">
         <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-black tracking-tight">
             Ready to Build Something Extraordinary?
           </h2>
-          <p className="text-neutral-300 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-neutral-600 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             Let's discuss how Kalki Web can scale your revenue, design your next
             breakthrough product, and drive real commercial results.
           </p>
