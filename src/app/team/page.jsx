@@ -32,6 +32,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import MarqueeShowcase from "@/components/marquee-showcase";
 
 // Department categories
 const departments = [
@@ -44,21 +45,28 @@ const departments = [
 
 const ourValues = [
   {
-    image: "https://picsum.photos/800/600",
+    image: "/images videos/gaurav.png",
     hint: "car emblem",
     title: "Craft & Arts",
     description:
       "We are artisans of the automotive world, dedicated to the highest quality and precision in every detail.",
   },
   {
-    image: "https://picsum.photos/800/600",
+    image: "/images videos/rajeev221.png",
     hint: "team collaboration",
     title: "Excellence",
     description:
       "We relentlessly pursue perfection, pushing the boundaries of performance and design.",
   },
   {
-    image: "https://picsum.photos/800/600",
+    image: "/images videos/rishav221.png",
+    hint: "engineers working",
+    title: "Responsibility",
+    description:
+      "We take ownership of our work, our team, and our impact on the world, ensuring a legacy of greatness.",
+  },
+  {
+    image: "/images videos/andaz.png",
     hint: "engineers working",
     title: "Responsibility",
     description:
@@ -372,14 +380,6 @@ const teamMembers = [
   },
 ];
 
-// Key stats
-const agencyStats = [
-  { label: "Specialists & Innovators", value: "25+", icon: Users },
-  { label: "Delivered Web Deployments", value: "180+", icon: Award },
-  { label: "Client Retention Rate", value: "99.4%", icon: Target },
-  { label: "Average Client Rating", value: "4.9 / 5", icon: Flame },
-];
-
 // Culture pillars
 const culturePillars = [
   {
@@ -503,36 +503,13 @@ export default function MeetOurTeamPage() {
               </Button>
             </div>
           </div>
-
-          {/* 2. Key Statistics Bar */}
-          <div className="mt-16 sm:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {agencyStats.map((stat, idx) => {
-              const IconComp = stat.icon;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-2xl p-6 bg-neutral-900/60 border border-white/10 backdrop-blur-sm flex flex-col items-center text-center space-y-2 group hover:border-primary/50 transition-all duration-300"
-                >
-                  <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-black transition-colors duration-300 mb-1">
-                    <IconComp className="w-5 h-5" />
-                  </div>
-                  <span className="text-3xl sm:text-4xl font-black text-white font-mono tracking-tight group-hover:text-primary transition-colors">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs sm:text-sm text-muted-foreground font-medium">
-                    {stat.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
       <section className=" container mb-16 md:mb-24 space-y-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center">
+        {/* <h2 className="text-3xl md:text-4xl font-bold text-center">
           OUR DEVIILLISH VALUES
-        </h2>
+        </h2> */}
         {ourValues.map((value, index) => (
           <div
             key={index}
@@ -560,10 +537,6 @@ export default function MeetOurTeamPage() {
       <section className="py-20 md:py-28 bg-background relative border-b border-border/40">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest">
-              <Flame className="w-3.5 h-3.5" />
-              <span>Our Culture & DNA</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
               The Principles That Bind Our Team
             </h2>
@@ -583,20 +556,12 @@ export default function MeetOurTeamPage() {
                   className="rounded-3xl p-8 sm:p-10 bg-neutral-900/60 border border-white/10 hover:border-primary/40 transition-all duration-300 flex flex-col justify-between space-y-6 group"
                 >
                   <div className="space-y-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/25 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors duration-300">
-                      <IconComp className="w-6 h-6" />
-                    </div>
                     <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
                       {pillar.title}
                     </h3>
                     <p className="text-neutral-300 text-sm sm:text-base leading-relaxed font-normal">
                       {pillar.description}
                     </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-primary">
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>Non-Negotiable Agency Standard</span>
                   </div>
                 </div>
               );
@@ -609,10 +574,6 @@ export default function MeetOurTeamPage() {
       <section className="py-20 md:py-28 bg-neutral-950/80 relative border-b border-border/40">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest">
-              <Layers className="w-3.5 h-3.5" />
-              <span>Cross-Disciplinary Symphony</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
               How Our Specialists Deliver Together
             </h2>
@@ -633,19 +594,11 @@ export default function MeetOurTeamPage() {
                     <span className="text-3xl font-black font-mono text-white/25">
                       {step.number}
                     </span>
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-primary px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20">
-                      {step.team}
-                    </span>
                   </div>
                   <h3 className="text-lg font-bold text-white">{step.phase}</h3>
                   <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal">
                     {step.description}
                   </p>
-                </div>
-
-                <div className="pt-4 border-t border-white/10 text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
-                  <span>Phase Output Delivered</span>
                 </div>
               </div>
             ))}
@@ -658,11 +611,6 @@ export default function MeetOurTeamPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary/10 rounded-full blur-[160px] pointer-events-none" />
 
         <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Scale With Us</span>
-          </div>
-
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight">
             Ready to Build With the Best in the Industry?
           </h2>
