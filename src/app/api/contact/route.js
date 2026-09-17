@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Inquiry from "@/models/Inquiry";
+import { sendLeadEmail } from "@/lib/nodemailer";
 
 export const dynamic = "force-dynamic";
 
@@ -44,7 +45,21 @@ export async function POST(req) {
       status: "new",
     });
 
-    // Auto-sync lead to Google Sheet & trigger email to kalkiweb06@gmail.com
+    // 1. Send direct email notification via Nodemailer
+    try {
+      await sendLeadEmail({
+        fullName: `${firstName.trim()} ${(lastName || "").trim()}`.trim(),
+        name: firstName.trim(),
+        email: email.trim().toLowerCase(),
+        phone: (phone || "").trim(),
+        message: (message || "").trim(),
+        date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      });
+    } catch (mailErr) {
+      console.error("Nodemailer dispatch error:", mailErr.message || mailErr);
+    }
+
+    // 2. Auto-sync lead to Google Sheet webhook
     const webhookUrl =
       process.env.LEADS_WEBHOOK_URL || process.env.GOOGLE_SHEET_WEBHOOK_URL;
 
@@ -57,10 +72,12 @@ export async function POST(req) {
             body: JSON.stringify({
               date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
               name: `${firstName.trim()} ${(lastName || "").trim()}`.trim(),
+              fullName: `${firstName.trim()} ${(lastName || "").trim()}`.trim(),
               firstName: firstName.trim(),
               lastName: (lastName || "").trim(),
               email: email.trim().toLowerCase(),
-              phone: (phone || "").trim(),
+              phone: (phone || "").trim() ? `'${(phone || "").trim()}` : "-",
+              rawPhone: (phone || "").trim(),
               message: (message || "").trim(),
               status: "New Lead",
             }),
@@ -70,7 +87,7 @@ export async function POST(req) {
           ),
         ]);
       } catch (webhookErr) {
-        console.error("Google Sheet / Mail Webhook notification:", webhookErr.message || webhookErr);
+        console.error("Google Sheet webhook notification:", webhookErr.message || webhookErr);
       }
     }
 

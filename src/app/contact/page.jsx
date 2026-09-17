@@ -27,6 +27,8 @@ export default function ContactPage() {
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
+    message: "",
   });
   const [submitting, setSubmitting] = useState(false);
   const [statusMsg, setStatusMsg] = useState({ type: "", text: "" });
@@ -66,7 +68,13 @@ export default function ContactPage() {
           type: "success",
           text: "Thank you! Form submitted successfully. Our team will contact you soon.",
         });
-        setFormData({ firstName: "", lastName: "", email: "" });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
       } else {
         setStatusMsg({
           type: "error",
@@ -283,6 +291,30 @@ export default function ContactPage() {
                     placeholder="E-mail"
                     required
                     className="w-full px-6 py-4 rounded-full bg-[#183640] border border-white/10 text-white placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Phone Number Input */}
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="Phone Number (e.g. +91 98765 43210)"
+                    className="w-full px-6 py-4 rounded-full bg-[#183640] border border-white/10 text-white placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Message / Project Requirements Input */}
+                <div>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={3}
+                    placeholder="Your Message / Project Details..."
+                    className="w-full px-6 py-3.5 rounded-2xl bg-[#183640] border border-white/10 text-white placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent transition-all shadow-inner resize-none"
                   />
                 </div>
 
