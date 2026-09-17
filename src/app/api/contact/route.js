@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Inquiry from "@/models/Inquiry";
 
+export const dynamic = "force-dynamic";
+
 // POST /api/contact - Submit new contact inquiry
 export async function POST(req) {
   try {
