@@ -20,6 +20,24 @@ export const metadata = {
 };
 export default function RootLayout({ children, }) {
     return (<html lang="en" className={cn("dark", poppins.variable)}>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-NKQ41QRW2N"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-NKQ41QRW2N');
+            `,
+          }}
+        />
+      </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", poppins.variable, kalam.variable, notoDevanagari.variable, notoBengali.variable, notoGurmukhi.variable, notoJP.variable, notoSC.variable)}>
         <ClientLayout>{children}</ClientLayout>
       </body>

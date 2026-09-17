@@ -1,25 +1,31 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 const servicesLinks = [
-    { name: "Web Designing", href: "/services/web-development" },
-    {
-        name: "Search Engine Optimization (SEO)",
-        href: "/services/digital-marketing",
-    },
-    { name: "Shopify Development", href: "/services/shopify-development" },
-    { name: "Social Media Marketing (SMM)", href: "/services/digital-marketing" },
-    { name: "Graphic Designing", href: "/services/graphic-ui-ux" },
-    { name: "Network Security WordPress", href: "/services/web-development" },
+  { name: "Web Development", href: "/services/web-development" },
+  { name: "Digital Marketing & SEO", href: "/services/digital-marketing" },
+  { name: "Shopify Development", href: "/services/shopify-development" },
+  { name: "E-Commerce Solutions", href: "/services/ecommerce" },
+  { name: "Graphic & UI/UX Design", href: "/services/graphic-ui-ux" },
+  { name: "Mobile App Development", href: "/services/mobile-app-development" },
+  { name: "AI & Automation Services", href: "/services/ai-services" },
+  { name: "Cloud & DevOps", href: "/services/devops" },
+  { name: "Back Office & Support", href: "/services/back-office" },
 ];
+
 const quickLinks = [
-    { name: "Home", href: "/" },
-    { name: "About us", href: "/about" },
-    { name: "Meet Our Team", href: "/team" },
-    { name: "Blogs", href: "/blog" },
-    { name: "Contact Us", href: "/contact" },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Meet Our Team", href: "/team" },
+  { name: "Our Portfolio", href: "/portfolio" },
+  { name: "Case Studies", href: "/case-studies" },
+  { name: "Pricing Plans", href: "/pricing" },
+  { name: "Blog & Insights", href: "/blog" },
+  { name: "Contact Us", href: "/contact" },
 ];
+
 export function Footer() {
-    return (<footer className="bg-neutral-50 text-neutral-600 border-t border-border">
+  return (
+    <footer className="bg-[#0a0a0a] text-neutral-400 border-t border-neutral-800">
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-4">

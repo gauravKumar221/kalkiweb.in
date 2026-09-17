@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import Preloader from "@/components/preloader";
 import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/toaster";
 import FloatingWhatsAppButton from "./floating-whatsapp-button";
 import CtaSection from "./cta-section";
@@ -34,22 +35,21 @@ export default function ClientLayout({ children }) {
 
     return (
         <SmoothScroll>
+            {/* Visual Preloader overlay - will not block SSR or crawler link discovery */}
             <AnimatePresence mode="wait">
                 {isLoading && !hidePublicChrome && <Preloader />}
             </AnimatePresence>
-            {!isLoading && (
-                <>
-                    {!hidePublicChrome && <Header />}
-                    <div>
-                        <main className="flex-grow flex flex-col">
-                            {children}
-                        </main>
-                    </div>
-                    {!hidePublicChrome && <CtaSection />}
-                    <Toaster />
-                    {!hidePublicChrome && <FloatingWhatsAppButton />}
-                </>
-            )}
+
+            {!hidePublicChrome && <Header />}
+            <div>
+                <main className="flex-grow flex flex-col">
+                    {children}
+                </main>
+            </div>
+            {!hidePublicChrome && <CtaSection />}
+            {!hidePublicChrome && <Footer />}
+            <Toaster />
+            {!hidePublicChrome && <FloatingWhatsAppButton />}
         </SmoothScroll>
     );
 }
