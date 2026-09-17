@@ -44,6 +44,36 @@ export async function POST(req) {
       status: "new",
     });
 
+    // Auto-sync lead to Google Sheet & trigger email to kalkiweb06@gmail.com
+    const webhookUrl =
+      process.env.LEADS_WEBHOOK_URL || process.env.GOOGLE_SHEET_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      try {
+        await Promise.race([
+          fetch(webhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+              name: `${firstName.trim()} ${(lastName || "").trim()}`.trim(),
+              firstName: firstName.trim(),
+              lastName: (lastName || "").trim(),
+              email: email.trim().toLowerCase(),
+              phone: (phone || "").trim(),
+              message: (message || "").trim(),
+              status: "New Lead",
+            }),
+          }),
+          new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Webhook timeout")), 4000)
+          ),
+        ]);
+      } catch (webhookErr) {
+        console.error("Google Sheet / Mail Webhook notification:", webhookErr.message || webhookErr);
+      }
+    }
+
     return NextResponse.json(
       {
         success: true,

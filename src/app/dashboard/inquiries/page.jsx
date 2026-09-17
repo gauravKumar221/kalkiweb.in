@@ -14,6 +14,8 @@ import {
   RefreshCw,
   ExternalLink,
   Filter,
+  Download,
+  FileSpreadsheet,
 } from "lucide-react";
 
 export default function DashboardInquiriesPage() {
@@ -116,23 +118,75 @@ export default function DashboardInquiriesPage() {
     [inquiries]
   );
 
+  const exportToExcel = () => {
+    if (!inquiries.length) {
+      alert("No inquiries available to export.");
+      return;
+    }
+
+    const headers = ["Date & Time", "Full Name", "Email", "Phone Number", "Message", "Status"];
+    const rows = inquiries.map((item) => [
+      item.createdAt ? new Date(item.createdAt).toLocaleString("en-IN") : "-",
+      `"${((item.firstName || "") + " " + (item.lastName || "")).trim().replace(/"/g, '""')}"`,
+      `"${(item.email || "").replace(/"/g, '""')}"`,
+      `"${(item.phone || "").replace(/"/g, '""')}"`,
+      `"${(item.message || "").replace(/"/g, '""').replace(/\n/g, " ")}"`,
+      item.status || "new",
+    ]);
+
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute(
+      "download",
+      `kalki_leads_${new Date().toISOString().slice(0, 10)}.csv`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-6 text-left font-sans">
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
-            Contact Inquiries
+            Contact Inquiries & Leads
           </h1>
           <p className="text-sm text-slate-500 mt-1">
-            Submissions received from the mobile & web Contact Us form, saved in MongoDB Atlas.
+            Real-time submissions from Contact Us forms, synced with MongoDB, Excel, and Google Sheets.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2">
+          <a
+            href="https://docs.google.com/spreadsheets/d/1iW7pt5VYZKivevZQB7aDrOnuI9YNSR3wnKDc572AR7M/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-200 bg-emerald-50 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors shadow-sm"
+          >
+            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Open Google Sheet</span>
+            <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+          </a>
+
+          <button
+            onClick={exportToExcel}
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
+            title="Download CSV for Excel"
+          >
+            <Download className="w-3.5 h-3.5 text-slate-500" />
+            <span>Export to Excel</span>
+          </button>
+
           <button
             onClick={fetchInquiries}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
             <span>Refresh</span>
