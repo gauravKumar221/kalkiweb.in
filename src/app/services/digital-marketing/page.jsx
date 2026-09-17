@@ -109,13 +109,10 @@ export default function DigitalMarketingPage() {
           ]}
         />
 
-        {/* Reusable Feature Showcase with 600x500 Image Slider */}
+        {/* Service Feature Showcase Tailored for New Business Owners */}
         <ServiceFeatureShowcase
-          title="A Comprehensive Approach to Growth"
-          subtitle="Our holistic approach to digital marketing ensures every channel works together to achieve your business objectives."
-          slides={digitalMarketingSlides}
+          serviceType="digital-marketing"
           features={features}
-          defaultDescription="We leverage data and creativity to craft campaigns that deliver measurable results and a high return on investment."
         />
 
         <B2BDisruptiveTech />

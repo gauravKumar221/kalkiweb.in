@@ -210,13 +210,10 @@ export default function GraphicUiUxPage() {
         speed={45}
       />
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="Design That Delights Users"
-        subtitle="Our design process is rooted in a deep understanding of your users, ensuring the final product is both beautiful and functional."
-        slides={showcaseSlides}
+        serviceType="graphic-ui-ux"
         features={features}
-        defaultDescription="We combine artistic talent with user research to create designs that not only look great but also drive results."
       />
 
       <DraggableLetters />

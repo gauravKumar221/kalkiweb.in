@@ -9,6 +9,8 @@ import {
   Users,
   Search,
   Linkedin,
+  Instagram,
+  MessageCircle,
   Github,
   Twitter,
   Mail,
@@ -46,34 +48,45 @@ const departments = [
 const ourValues = [
   {
     image: "/images videos/gaurav.png",
-    hint: "car emblem",
-    title: "Craft & Arts",
+    hint: "team manager and leadership",
+    title: "Gaurav Kumar — Team Manager",
+    instagram: "@itzonly_gaurav",
+    whatsapp: "+91 9304987505",
+    linkidin: "https://www.linkedin.com/in/gaurav-kumar-307484238/",
     description:
-      "We are artisans of the automotive world, dedicated to the highest quality and precision in every detail.",
+      "Gaurav Kumar leads the team with a strong focus on planning, management, and project execution. He coordinates different departments, manages client requirements, solves critical challenges, and ensures every project moves smoothly from concept to successful delivery with quality, professionalism, and clear communication.",
   },
   {
     image: "/images videos/rajeev221.png",
-    hint: "team collaboration",
-    title: "Excellence",
+    hint: "creative designer and innovator",
+    title: "Rajeev — Creative & Innovation",
+    instagram: "@itzonly_gaurav",
+    whatsapp: "+91 9304987505",
+    linkidin: "",
     description:
-      "We relentlessly pursue perfection, pushing the boundaries of performance and design.",
+      "Rajeev brings creativity, fresh ideas, and innovative thinking to every project. From visual concepts and design direction to finding smarter solutions for complex requirements, he helps transform ideas into practical experiences. His ability to think differently adds creativity, functionality, and a unique identity to our work.",
   },
   {
     image: "/images videos/rishav221.png",
-    hint: "engineers working",
-    title: "Responsibility",
+    hint: "wordpress developer and technical lead",
+    title: "Rishav — Tech Lead & Developer",
+    instagram: "@itzonly_gaurav",
+    whatsapp: "+91 9304987505",
+    linkidin: "",
     description:
-      "We take ownership of our work, our team, and our impact on the world, ensuring a legacy of greatness.",
+      "Rishav works as our Tech Lead, specializing in WordPress development, backend solutions, hosting management, website optimization, and technical problem-solving. He handles complex development challenges, manages technical infrastructure, and ensures websites remain secure, stable, scalable, and professionally developed for long-term performance.",
   },
   {
     image: "/images videos/andaz.png",
-    hint: "engineers working",
-    title: "Responsibility",
+    hint: "all rounder design and development",
+    title: "Andaz — All-Rounder",
+    instagram: "@itzonly_gaurav",
+    whatsapp: "+91 9304987505",
+    linkidin: "",
     description:
-      "We take ownership of our work, our team, and our impact on the world, ensuring a legacy of greatness.",
+      "Andaz is an all-rounder who contributes across design, development, creative work, and project execution. From handling design requirements to supporting technical tasks and exploring new ideas, he adapts quickly to different challenges and plays an important role in keeping projects creative, flexible, and efficient.",
   },
 ];
-
 // Comprehensive team directory
 const teamMembers = [
   {
@@ -516,8 +529,55 @@ export default function MeetOurTeamPage() {
             className={`grid md:grid-cols-2 gap-8 md:gap-16 items-center ${index % 2 !== 0 ? "md:grid-flow-row-dense" : ""}`}
           >
             <div className={`${index % 2 !== 0 ? "md:col-start-2" : ""}`}>
-              <h3 className="text-2xl font-bold mb-4">{value.title}</h3>
+              <h3 className="text-7xl font-bold mb-4">{value.title}</h3>
               <p className="text-neutral-400">{value.description}</p>
+              <div className="flex items-center gap-3 mt-6">
+                {(value.linkidin || value.linkedin) && (
+                  <a
+                    href={
+                      (value.linkidin || value.linkedin).startsWith("http")
+                        ? value.linkidin || value.linkedin
+                        : `https://linkedin.com/in/${(value.linkidin || value.linkedin).replace(/^@/, "")}`
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="w-10 h-10 rounded-full bg-neutral-900 border border-white/10 hover:border-primary/50 hover:bg-primary hover:text-black text-neutral-300 transition-all duration-300 flex items-center justify-center group"
+                  >
+                    <Linkedin className="w-5 h-5 transition-transform group-hover:scale-110" />
+                  </a>
+                )}
+                {value.instagram && (
+                  <a
+                    href={
+                      value.instagram.startsWith("http")
+                        ? value.instagram
+                        : `https://instagram.com/${value.instagram.replace(/^@/, "")}`
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="w-10 h-10 rounded-full bg-neutral-900 border border-white/10 hover:border-primary/50 hover:bg-primary hover:text-black text-neutral-300 transition-all duration-300 flex items-center justify-center group"
+                  >
+                    <Instagram className="w-5 h-5 transition-transform group-hover:scale-110" />
+                  </a>
+                )}
+                {value.whatsapp && (
+                  <a
+                    href={
+                      value.whatsapp.startsWith("http")
+                        ? value.whatsapp
+                        : `https://wa.me/${value.whatsapp.replace(/[^0-9]/g, "")}`
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                    className="w-10 h-10 rounded-full bg-neutral-900 border border-white/10 hover:border-primary/50 hover:bg-primary hover:text-black text-neutral-300 transition-all duration-300 flex items-center justify-center group"
+                  >
+                    <MessageCircle className="w-5 h-5 transition-transform group-hover:scale-110" />
+                  </a>
+                )}
+              </div>
             </div>
             <div>
               <Image
@@ -550,16 +610,32 @@ export default function MeetOurTeamPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             {culturePillars.map((pillar, idx) => {
               const IconComp = pillar.icon;
+
               return (
                 <div
                   key={idx}
-                  className="rounded-3xl p-8 sm:p-10 bg-neutral-900/60 border border-white/10 hover:border-primary/40 transition-all duration-300 flex flex-col justify-between space-y-6 group"
+                  className={`rounded-3xl p-8 sm:p-10 transition-all duration-300 flex flex-col justify-between space-y-6 group ${
+                    idx === 1
+                      ? "bg-white border border-black/10 hover:border-primary/40"
+                      : "bg-neutral-900/60 border border-white/10 hover:border-primary/40"
+                  }`}
                 >
                   <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">
+                    <h3
+                      className={`text-2xl font-bold transition-colors ${
+                        idx === 1
+                          ? "text-black group-hover:text-primary"
+                          : "text-white group-hover:text-primary"
+                      }`}
+                    >
                       {pillar.title}
                     </h3>
-                    <p className="text-neutral-300 text-sm sm:text-base leading-relaxed font-normal">
+
+                    <p
+                      className={`text-sm sm:text-base leading-relaxed font-normal ${
+                        idx === 1 ? "text-neutral-600" : "text-neutral-300"
+                      }`}
+                    >
                       {pillar.description}
                     </p>
                   </div>
@@ -587,16 +663,36 @@ export default function MeetOurTeamPage() {
             {collaborationSteps.map((step, idx) => (
               <div
                 key={idx}
-                className="relative rounded-3xl p-6 sm:p-7 bg-neutral-900/70 border border-white/10 hover:border-primary/40 flex flex-col justify-between space-y-6 transition-all duration-300"
+                className={`relative rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-6 transition-all duration-300 ${
+                  idx === 1
+                    ? "bg-white border border-black/10 hover:border-primary/40"
+                    : "bg-neutral-900/70 border border-white/10 hover:border-primary/40"
+                }`}
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-3xl font-black font-mono text-white/25">
+                    <span
+                      className={`text-3xl font-black font-mono ${
+                        idx === 1 ? "text-black/25" : "text-white/25"
+                      }`}
+                    >
                       {step.number}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-white">{step.phase}</h3>
-                  <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal">
+
+                  <h3
+                    className={`text-lg font-bold ${
+                      idx === 1 ? "text-black" : "text-white"
+                    }`}
+                  >
+                    {step.phase}
+                  </h3>
+
+                  <p
+                    className={`text-xs sm:text-sm leading-relaxed font-normal ${
+                      idx === 1 ? "text-neutral-600" : "text-neutral-300"
+                    }`}
+                  >
                     {step.description}
                   </p>
                 </div>
@@ -607,15 +703,15 @@ export default function MeetOurTeamPage() {
       </section>
 
       {/* 6. High-Impact Careers & Consultation Banner */}
-      <section className="py-20 md:py-28 bg-neutral-950 text-center relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-white text-center relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary/10 rounded-full blur-[160px] pointer-events-none" />
 
         <div className="container max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-8">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-black tracking-tight leading-tight">
             Ready to Build With the Best in the Industry?
           </h2>
 
-          <p className="text-neutral-300 text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-black text-sm sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             Whether you need a full dedicated engineering team, a brand
             transformation, or high-velocity SEO & digital growth, we're ready
             to partner with you.

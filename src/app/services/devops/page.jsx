@@ -101,13 +101,10 @@ export default function DevOpsPage() {
         ]}
       />
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="Accelerate Your Development Cycle"
-        subtitle="Our DevOps experts help you build, test, and release software faster and more reliably."
-        slides={devopsShowcaseSlides}
+        serviceType="devops"
         features={features}
-        defaultDescription="We implement best practices to ensure your infrastructure is scalable, resilient, and secure."
       />
       
         <section id="process" className="py-16 md:py-24 bg-card">

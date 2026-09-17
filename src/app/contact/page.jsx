@@ -1,123 +1,406 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
-import { ContactForm } from "@/components/forms";
-import { Button } from "@/components/ui/button";
-import { Linkedin, Mail, MapPin, Phone, MessageCircle, Plus, Minus, Sparkles } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, } from "@/components/ui/accordion";
+
+import React, { useState } from "react";
 import Image from "next/image";
-const faqs = [
-    {
-        question: "What does a Creative Brand Marketing Company do?",
-        answer: "A creative brand marketing company helps businesses build a strong brand identity and connect with their target audience through strategic marketing initiatives. This includes services like branding, web design, content creation, SEO, and social media management."
-    },
-    {
-        question: "Why should I choose Kalki Web as my Brand Marketing Agency?",
-        answer: "Kalki Web offers a unique blend of creative design, technical expertise, and data-driven marketing strategies. We are committed to delivering measurable results and building long-term partnerships with our clients."
-    },
-    {
-        question: "Do you offer complete digital marketing services under one roof?",
-        answer: "Yes, Kalki Web provides end-to-end digital marketing — from branding and website development to SEO, social media, and paid campaigns — all customized for your goals."
-    },
-    {
-        question: "Can a Creative Brand Marketing Agency help small businesses grow?",
-        answer: "Absolutely. We specialize in helping small and medium-sized businesses establish a strong online presence and compete effectively in the digital marketplace. Our scalable solutions are designed to grow with your business."
-    },
-    {
-        question: "How can I get started with Kalki Web?",
-        answer: "Getting started is easy! Simply contact us through our website or give us a call to schedule a free consultation. We'll discuss your business goals and how we can help you achieve them."
-    }
-];
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  ArrowLeft,
+  ArrowUp,
+  Send,
+  Linkedin,
+  Facebook,
+  Menu,
+  X,
+  CheckCircle2,
+  AlertCircle,
+  Home,
+  BookOpen,
+  Users,
+  Briefcase,
+} from "lucide-react";
+
 export default function ContactPage() {
-    return (<>
-      <div className="container py-16 md:py-24">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl">Get in Touch</h1>
-          <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-            We'd love to hear from you. Whether you have a question about our services or want to start a project, our team is ready to answer all your questions.
-          </p>
-        </div>
+  const [activeScreen, setActiveScreen] = useState(1); // 1 = Hero Screen, 2 = Contact Screen
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [statusMsg, setStatusMsg] = useState({ type: "", text: "" });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          <div>
-            <h2 className="text-3xl font-bold mb-8">Send Us a Message</h2>
-            <Card>
-              <CardContent className="p-8">
-                <ContactForm />
-              </CardContent>
-            </Card>
-          </div>
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (statusMsg.text) setStatusMsg({ type: "", text: "" });
+  };
 
-          <div className="space-y-8">
-            <h2 className="text-3xl font-bold">Contact Information</h2>
-            <div className="space-y-6 text-lg">
-              <div className="flex items-center gap-4">
-                <Phone className="w-6 h-6 text-primary"/>
-                <a href="tel:9304987505" className="hover:text-primary transition-colors">+91 9304987505</a>
-              </div>
-              <div className="flex items-center gap-4">
-                <Mail className="w-6 h-6 text-primary"/>
-                <a href="mailto:kalkiweb06@gmail.com" className="hover:text-primary transition-colors">kalkiweb06@gmail.com</a>
-              </div>
-              <div className="flex items-center gap-4">
-                <Linkedin className="w-6 h-6 text-primary"/>
-                <a href="https://www.linkedin.com/in/gaurav-kumar-307484238/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Gaurav Kumar on LinkedIn</a>
-              </div>
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-primary mt-1"/>
-                <span>Dak Bunglow, Lodipur, Patna, Bihar 800001</span>
-              </div>
-            </div>
-            <Button asChild size="lg" className="w-full bg-green-500 hover:bg-green-600 text-white" variant="glitch">
-              <a href="https://wa.me/919304987505" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-5 h-5 mr-2"/> Chat on WhatsApp
-              </a>
-            </Button>
-          </div>
-        </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatusMsg({ type: "", text: "" });
 
-        <section className="py-16 md:py-24">
-            <div className="rounded-lg overflow-hidden">
-                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.86470487926!2d85.13739797593605!3d25.609405916386553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58f3ab7a1e35%3A0x809a0a486c91353a!2sDak%20Bungalow%20Chauraha!5e0!3m2!1sen!2sin!4v1725350371333!5m2!1sen!2sin" width="100%" height="450" style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </section>
+    if (!formData.firstName.trim()) {
+      setStatusMsg({ type: "error", text: "Please enter your First Name" });
+      return;
+    }
+    if (!formData.email.trim()) {
+      setStatusMsg({ type: "error", text: "Please enter your E-mail" });
+      return;
+    }
 
-        <section className="py-16 md:py-24 bg-muted text-foreground rounded-2xl border border-border">
-              <div className="container">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
-                    <div className="relative">
-                        <Image src="https://picsum.photos/seed/faq-main/600/700" data-ai-hint="team discussion coffee" alt="Team discussing" width={600} height={700} className="rounded-2xl object-cover"/>
-                        <div className="absolute bottom-8 left-8">
-                             <Image src="https://picsum.photos/seed/faq-inset/400/250" data-ai-hint="man smiling" alt="Team member" width={400} height={250} className="rounded-2xl object-cover border-4 border-muted"/>
-                        </div>
+    try {
+      setSubmitting(true);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatusMsg({
+          type: "success",
+          text: "Thank you! Form submitted successfully. Our team will contact you soon.",
+        });
+        setFormData({ firstName: "", lastName: "", email: "" });
+      } else {
+        setStatusMsg({
+          type: "error",
+          text: data.error || "Failed to submit. Please try again.",
+        });
+      }
+    } catch (err) {
+      setStatusMsg({
+        type: "error",
+        text: "Network error. Please check your connection and try again.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen w-full bg-[#0c242c] flex flex-col items-center justify-center p-0 m-0 font-sans select-none overflow-x-hidden">
+      {/* Container - Completely Edge-to-Edge / Zero Border Radius */}
+      <div className="w-full max-w-md min-h-[100dvh] flex flex-col justify-between relative bg-[#0c242c] text-white rounded-none border-none shadow-none">
+        
+        <AnimatePresence mode="wait">
+          {/* ======================================================== */}
+          {/* SCREEN 1: HERO SCREEN (MATCHING SCREENSHOT 1)             */}
+          {/* ======================================================== */}
+          {activeScreen === 1 && (
+            <motion.div
+              key="screen-1"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.28, ease: "easeInOut" }}
+              className="relative w-full min-h-[100dvh] flex flex-col justify-between p-6 sm:p-8 rounded-none border-none"
+            >
+              {/* Background Image of Truck on Highway at Golden Hour */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/illustrations/highway_truck_sunset.jpg"
+                  alt="Highway Transport at Sunset"
+                  fill
+                  priority
+                  className="object-cover object-center"
+                />
+                {/* Top and Bottom Gradient Overlays for optimal text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-transparent to-black/90" />
+              </div>
+
+              {/* Top Brand Bar & Mobile Hamburger Menu */}
+              <div className="relative z-10 flex items-center justify-between pt-2">
+                {/* Brand Logo */}
+                <div className="flex flex-col text-left">
+                  <span className="text-2xl font-black tracking-tighter uppercase text-white leading-none drop-shadow-md">
+                    CARGOX <br />
+                    <span className="text-[#FACC15]">GROUP</span>
+                  </span>
+                </div>
+
+                {/* Hamburger Icon */}
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2.5 rounded-full bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-all border border-white/15 cursor-pointer"
+                  aria-label="Toggle navigation menu"
+                >
+                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+              </div>
+
+              {/* Dropdown Mobile Navigation Overlay */}
+              {mobileMenuOpen && (
+                <div className="absolute top-20 right-6 z-30 w-56 bg-[#0e2730]/95 backdrop-blur-xl border border-white/15 rounded-2xl p-4 shadow-2xl space-y-2 animate-in fade-in zoom-in-95 duration-200">
+                  <Link
+                    href="/"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white/90 hover:bg-white/10 hover:text-white"
+                  >
+                    <Home className="w-4 h-4 text-[#FACC15]" />
+                    <span>Home</span>
+                  </Link>
+                  <Link
+                    href="/blog"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white/90 hover:bg-white/10 hover:text-white"
+                  >
+                    <BookOpen className="w-4 h-4 text-[#FACC15]" />
+                    <span>Blog Articles</span>
+                  </Link>
+                  <Link
+                    href="/team"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white/90 hover:bg-white/10 hover:text-white"
+                  >
+                    <Users className="w-4 h-4 text-[#FACC15]" />
+                    <span>Our Team</span>
+                  </Link>
+                  <Link
+                    href="/services"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-white/90 hover:bg-white/10 hover:text-white"
+                  >
+                    <Briefcase className="w-4 h-4 text-[#FACC15]" />
+                    <span>Services</span>
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setActiveScreen(2);
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-black bg-[#FACC15] hover:bg-[#EAB308] cursor-pointer"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>Contact Us</span>
+                  </button>
+                </div>
+              )}
+
+              {/* Lower Content: Giant Headline & Flawless Pill Button */}
+              <div className="relative z-10 pb-4 space-y-6 text-left">
+                {/* Big Bold Condensed Headline */}
+                <h1 className="text-[52px] sm:text-[58px] font-black uppercase tracking-tight leading-[0.92] text-white drop-shadow-lg">
+                  BEYOND <br />
+                  <span className="text-[#FACC15]">BORDERS</span> <br />
+                  AND LIMITS
+                </h1>
+
+                {/* Seamless Yellow Pill Button with Integrated Circle Arrow (No Border-Radius Glitch) */}
+                <div className="pt-2">
+                  <button
+                    onClick={() => setActiveScreen(2)}
+                    className="group inline-flex items-center bg-[#FACC15] hover:bg-[#EAB308] rounded-full pl-7 pr-2 py-2 shadow-xl transition-all active:scale-95 cursor-pointer"
+                  >
+                    <span className="text-slate-950 font-bold text-base sm:text-lg tracking-tight mr-3">
+                      Get in touch
+                    </span>
+                    <div className="w-11 h-11 rounded-full bg-[#0c1e24] border-2 border-[#FACC15] flex items-center justify-center text-white shrink-0 shadow-md group-hover:scale-105 transition-transform">
+                      <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
-                    <div>
-                        <div className="flex items-center gap-2 text-primary mb-4">
-                            <Sparkles className="w-5 h-5"/>
-                            <span className="font-semibold text-sm">FAQS</span>
-                        </div>
-                        <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl mb-8">Let us Address your <span className="text-primary">Questions</span> Today!</h2>
-                        <Accordion type="single" collapsible className="w-full space-y-4">
-                            {faqs.map((faq, index) => (<AccordionItem value={`item-${index}`} key={index} className="border border-border rounded-lg bg-card">
-                                    <AccordionTrigger className="hover:no-underline text-lg p-6 group">
-                                        <span className="flex-1 text-left">{faq.question}</span>
-                                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center shrink-0 transition-colors duration-300 group-hover:bg-primary">
-                                            <Plus className="h-5 w-5 shrink-0 transition-transform duration-200 group-data-[state=open]:hidden text-foreground"/>
-                                            <Minus className="h-5 w-5 shrink-0 transition-transform duration-200 hidden group-data-[state=open]:block text-foreground"/>
-                                        </div>
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-muted-foreground text-base pt-0 p-6">
-                                        <div className="flex items-start gap-3">
-                                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2.5 shrink-0"></div>
-                                            <p>{faq.answer}</p>
-                                        </div>
-                                    </AccordionContent>
-                                </AccordionItem>))}
-                        </Accordion>
-                    </div>
+                  </button>
                 </div>
               </div>
-          </section>
-        
+            </motion.div>
+          )}
+
+          {/* ======================================================== */}
+          {/* SCREEN 2: CONTACT US FORM (MATCHING SCREENSHOT 2)         */}
+          {/* ======================================================== */}
+          {activeScreen === 2 && (
+            <motion.div
+              key="screen-2"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.28, ease: "easeInOut" }}
+              className="relative w-full min-h-[100dvh] bg-[#0c242c] text-white flex flex-col justify-between p-6 sm:p-8 rounded-none border-none text-left"
+            >
+              {/* Top Bar with Back Button */}
+              <div className="pt-2 flex items-center justify-between">
+                <button
+                  onClick={() => setActiveScreen(1)}
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md transition-colors cursor-pointer"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back</span>
+                </button>
+
+                <div className="text-xs font-mono text-slate-400">
+                  Step 2 of 2
+                </div>
+              </div>
+
+              {/* Form Title & Subtitle */}
+              <div className="space-y-2 pt-4">
+                <h2 className="text-4xl sm:text-5xl font-black uppercase tracking-tight text-white leading-none">
+                  CONTACT <span className="text-[#FACC15]">US</span>
+                </h2>
+                <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed">
+                  Complete the form and our team will contact you soon.
+                </p>
+              </div>
+
+              {/* Form Fields & Submission */}
+              <form onSubmit={handleSubmit} className="space-y-4 my-6">
+                {/* First Name Input */}
+                <div>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    placeholder="First Name"
+                    required
+                    className="w-full px-6 py-4 rounded-full bg-[#183640] border border-white/10 text-white placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Last Name Input */}
+                <div>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    placeholder="Last Name"
+                    className="w-full px-6 py-4 rounded-full bg-[#183640] border border-white/10 text-white placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* E-mail Input */}
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="E-mail"
+                    required
+                    className="w-full px-6 py-4 rounded-full bg-[#183640] border border-white/10 text-white placeholder:text-slate-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#FACC15] focus:border-transparent transition-all shadow-inner"
+                  />
+                </div>
+
+                {/* Status Feedback Message */}
+                {statusMsg.text && (
+                  <div
+                    className={`p-3 rounded-2xl text-xs font-medium flex items-center gap-2 ${
+                      statusMsg.type === "success"
+                        ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                        : "bg-red-500/20 text-red-300 border border-red-500/30"
+                    }`}
+                  >
+                    {statusMsg.type === "success" ? (
+                      <CheckCircle2 className="w-4 h-4 shrink-0" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                    )}
+                    <span>{statusMsg.text}</span>
+                  </div>
+                )}
+
+                {/* Yellow Pill Send Button */}
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full py-4 rounded-full bg-[#FACC15] hover:bg-[#EAB308] text-slate-950 font-extrabold text-base tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
+                >
+                  {submitting ? (
+                    <>
+                      <div className="w-4 h-4 rounded-full border-2 border-slate-950 border-t-transparent animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <span>Send</span>
+                  )}
+                </button>
+              </form>
+
+              {/* Contact Details & Social / Action Footer */}
+              <div className="space-y-6 pt-2">
+                {/* Direct Contact Information */}
+                <div className="space-y-1.5 text-slate-300 text-sm sm:text-base">
+                  <div>
+                    <a
+                      href="mailto:kalkiweb06@gmail.com"
+                      className="hover:text-white transition-colors"
+                    >
+                      info@cargoxgroup.com
+                    </a>
+                  </div>
+                  <div>
+                    <a
+                      href="tel:+919304987505"
+                      className="hover:text-white transition-colors"
+                    >
+                      +1 (555) 234-7890
+                    </a>
+                  </div>
+                </div>
+
+                {/* Bottom Row: Social Circles on Left, Return to Screen 1 on Right */}
+                <div className="flex items-center justify-between pt-2">
+                  {/* Social Circles */}
+                  <div className="flex items-center gap-3">
+                    {/* Telegram / Send */}
+                    <a
+                      href="https://wa.me/919304987505"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="WhatsApp Message"
+                      className="w-12 h-12 rounded-full bg-white text-slate-900 flex items-center justify-center hover:scale-110 hover:bg-[#FACC15] transition-all shadow-md"
+                    >
+                      <Send className="w-5 h-5 -translate-x-0.5 translate-y-0.5" />
+                    </a>
+
+                    {/* LinkedIn */}
+                    <a
+                      href="https://www.linkedin.com/in/gaurav-kumar-307484238/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn Profile"
+                      className="w-12 h-12 rounded-full bg-white text-slate-900 flex items-center justify-center hover:scale-110 hover:bg-[#FACC15] transition-all shadow-md"
+                    >
+                      <Linkedin className="w-5 h-5" />
+                    </a>
+
+                    {/* Facebook */}
+                    <a
+                      href="https://www.facebook.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Facebook Profile"
+                      className="w-12 h-12 rounded-full bg-white text-slate-900 flex items-center justify-center hover:scale-110 hover:bg-[#FACC15] transition-all shadow-md"
+                    >
+                      <Facebook className="w-5 h-5" />
+                    </a>
+                  </div>
+
+                  {/* Return to Screen 1 Button */}
+                  <button
+                    onClick={() => setActiveScreen(1)}
+                    aria-label="Back to Hero screen"
+                    className="w-12 h-12 rounded-full bg-white text-slate-900 flex items-center justify-center hover:scale-110 hover:bg-[#FACC15] transition-all shadow-md cursor-pointer"
+                  >
+                    <ArrowUp className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Copyright Note */}
+                <div className="text-xs text-slate-400 pt-2">
+                  © 2026. All rights reserved.
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </div>
-    </>);
+    </div>
+  );
 }

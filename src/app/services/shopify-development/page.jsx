@@ -191,13 +191,10 @@ export default function ShopifyDevelopmentPage() {
 
       <DigitalGrowthPartner tabs={shopifyTabs} />
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="Launch Your Store with Confidence"
-        subtitle="Our Shopify experts handle every detail to ensure your e-commerce store is a success from day one."
-        slides={shopifyShowcaseSlides}
+        serviceType="shopify-development"
         features={features}
-        defaultDescription="We go beyond the basics to deliver a store that not only looks great but also performs exceptionally."
       />
 
       <section id="process" className="py-16 md:py-24 bg-card">

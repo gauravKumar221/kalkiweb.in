@@ -261,8 +261,12 @@ export function Header() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed inset-0 w-full h-screen bg-[#F8F8FA] text-[#0d0c22] z-50 overflow-y-auto overscroll-contain flex flex-col justify-start"
-            style={{ WebkitOverflowScrolling: "touch" }}
+            data-lenis-prevent="true"
+            data-lenis-prevent-wheel="true"
+            data-lenis-prevent-touch="true"
+            tabIndex={-1}
+            className="fixed inset-0 w-full h-[100dvh] bg-[#F8F8FA] text-[#0d0c22] z-50 overflow-y-auto overscroll-contain flex flex-col justify-start"
+            style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}
           >
             {/* Sticky Top Header with Logo & Close Button */}
             <div className="sticky top-0 left-0 right-0 z-50 bg-[#F8F8FA]/95 backdrop-blur-md border-b border-black/5 shrink-0">

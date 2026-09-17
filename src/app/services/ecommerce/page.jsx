@@ -121,13 +121,10 @@ export default function EcommercePage() {
       
       <DigitalGrowthPartner tabs={ecommerceTabs}/>
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="Build a High-Converting Online Store"
-        subtitle="Our experts handle every aspect of your ecommerce build, from user experience to backend logic, ensuring a successful launch."
-        slides={ecommerceShowcaseSlides}
+        serviceType="ecommerce"
         features={features}
-        defaultDescription="We focus on creating intuitive, secure, and high-performing ecommerce solutions that your customers will love."
       />
       
         <section id="process" className="py-16 md:py-24 bg-card">

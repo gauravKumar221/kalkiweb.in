@@ -149,13 +149,10 @@ export default function AiServicesPage() {
         ]}
       />
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="Unlock Your Business's Potential with AI"
-        subtitle="Our AI experts develop custom solutions tailored to your specific business needs and challenges."
-        slides={aiShowcaseSlides}
+        serviceType="ai-services"
         features={features}
-        defaultDescription="We help you integrate cutting-edge AI technologies to drive efficiency, innovation, and growth."
       />
 
       <section className="py-16 md:py-24 bg-card">

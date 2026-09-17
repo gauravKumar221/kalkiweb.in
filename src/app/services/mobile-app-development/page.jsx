@@ -102,13 +102,10 @@ export default function MobileAppDevelopmentPage() {
         ]}
       />
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="From Idea to App Store"
-        subtitle="Our end-to-end mobile app development services cover everything from initial strategy to launch and ongoing support."
-        slides={mobileShowcaseSlides}
+        serviceType="mobile-app-development"
         features={features}
-        defaultDescription="We focus on creating engaging mobile experiences that deliver value to your users and business."
       />
 
       {/* Floating Smartphone Mockup & App Showcase Section */}

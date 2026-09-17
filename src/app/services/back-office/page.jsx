@@ -101,13 +101,10 @@ export default function BackOfficePage() {
         ]}
       />
 
-      {/* Reusable Feature Showcase with 600x500 Image Slider */}
+      {/* Service Feature Showcase Tailored for New Business Owners */}
       <ServiceFeatureShowcase
-        title="Focus on What Matters Most"
-        subtitle="Let our expert team handle your essential but time-consuming back-office tasks with precision and care."
-        slides={backOfficeShowcaseSlides}
+        serviceType="back-office"
         features={features}
-        defaultDescription="Our reliable back-office solutions help you save time and money while improving operational efficiency."
       />
       
         <section id="process" className="py-16 md:py-24 bg-card">

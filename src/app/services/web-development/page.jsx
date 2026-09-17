@@ -20,6 +20,7 @@ import IndustriesSection from "@/components/industries-section";
 import DigitalGrowthPartner from "@/components/digital-growth-partner";
 import ServiceHero from "@/components/service-hero";
 import ShowcaseImageSlider from "@/components/showcase-image-slider";
+import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
 const webDevShowcaseSlides = [
   {
@@ -195,6 +196,19 @@ export default function WebDevelopmentPage() {
       <DigitalGrowthPartner tabs={webDevTabs} className="pb-8 md:pb-12" />
 
       <IndustriesSection />
+      
+      {/* Service Feature Showcase Tailored for New Business Owners */}
+      <ServiceFeatureShowcase
+        serviceType="web-development"
+        features={[
+          "Next.js 15 Full-Stack",
+          "Sub-Second Page Load",
+          "SEO & Core Vitals 99+",
+          "SSL & DDoS Protected",
+          "Responsive Mobile-First",
+          "24/7 Monitoring & Backups",
+        ]}
+      />
 
       <section className="py-16 md:py-24 bg-card">
         <div className="container">
