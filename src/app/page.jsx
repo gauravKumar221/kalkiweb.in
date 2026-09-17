@@ -156,11 +156,19 @@ export default function Home() {
             <Globe className="w-full h-full" />
           </div>
         </div>
-        <div className="container z-10 relative flex-grow flex items-center justify-center">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl lg:text-7xl">
-              We grow brands with bold design & digital marketing.
+        <div className="container z-10 relative flex-grow flex items-center justify-center px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs sm:text-sm font-medium tracking-wide">
+              <span className="font-bold">★ Top-Rated & Most Trusted SEO Company in India</span>
+              <span className="hidden sm:inline">•</span>
+              <span className="hidden sm:inline text-muted-foreground">Best Digital Marketing Agency</span>
+            </div>
+            <h1 className="text-3xl font-bold tracking-tighter text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+              We grow brands with <span className="text-primary">bold design</span> & <span className="text-primary">digital marketing</span>.
             </h1>
+            <p className="text-xs sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto font-normal leading-relaxed">
+              India's premier performance marketing agency — delivering expert website development, Google Ads PPC management, and strategic SEO services for high-growth businesses.
+            </p>
           </div>
         </div>
         <div className="w-full z-10 relative pb-4">

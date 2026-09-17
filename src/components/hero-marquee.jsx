@@ -29,10 +29,11 @@ const MarqueeContent = ({ isLogo = false }) => {
     );
   }
   return (
-    <h2 className="text-4xl md:text-5xl font-bold whitespace-nowrap text-foreground px-8">
-      <span className="text-primary">React</span> Developer •{" "}
-      <span className="text-primary">Next.js</span> Expert • SEO • Digital
-      Marketing • <span className="text-primary">Shopify</span> Developer
+    <h2 className="text-3xl md:text-5xl font-bold whitespace-nowrap text-foreground px-8">
+      <span className="text-primary">Best Digital Marketing Agency</span> •{" "}
+      <span className="text-primary">Top SEO Company India</span> • Website Development
+      Company • <span className="text-primary">Google Ads Management</span> • Shopify
+      Development • Performance Marketing Agency
     </h2>
   );
 };
