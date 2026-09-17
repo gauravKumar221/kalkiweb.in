@@ -13,6 +13,29 @@ import DigitalGrowthPartner from "@/components/digital-growth-partner";
 import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
+export const metadata = {
+  title: "Shopify Development Company India | Shopify Plus Experts - Kalki Web",
+  description: "Leading Shopify development company building bespoke Liquid and Hydrogen headless stores, custom Shopify apps, and frictionless high-converting checkouts.",
+  keywords: [
+    "Shopify Development Company",
+    "Shopify Plus Agency",
+    "E-commerce Website Development",
+    "Shopify Theme Customization",
+    "Headless Shopify Development",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/shopify-development",
+  },
+  openGraph: {
+    title: "Shopify Development Company India | Kalki Web",
+    description: "Bespoke Shopify Plus development, headless Hydrogen stores, and custom e-commerce optimization.",
+    url: "https://www.kalkiweb.in/services/shopify-development",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides for Shopify Stores
 const shopifyShowcaseSlides = [
   {

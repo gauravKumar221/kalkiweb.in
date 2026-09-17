@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
 const servicesLinks = [
   { name: "Web Development", href: "/services/web-development" },
   { name: "Digital Marketing & SEO", href: "/services/digital-marketing" },
@@ -23,9 +24,9 @@ const quickLinks = [
   { name: "Contact Us", href: "/contact" },
 ];
 
-export function Footer() {
+export function Footer({ className }) {
   return (
-    <footer className="bg-[#0a0a0a] text-neutral-400 border-t border-neutral-800">
+    <footer className={cn("md:hidden bg-[#0a0a0a] text-neutral-400 border-t border-neutral-800", className)}>
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="space-y-4">

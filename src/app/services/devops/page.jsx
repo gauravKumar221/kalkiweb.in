@@ -8,6 +8,29 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
+export const metadata = {
+  title: "Cloud & DevOps Engineering Services | AWS, Docker & K8s - Kalki Web",
+  description: "Enterprise cloud architecture, automated CI/CD pipelines, Docker containerization, Kubernetes orchestration, and zero-downtime deployments.",
+  keywords: [
+    "DevOps Services India",
+    "Cloud Architecture",
+    "AWS DevOps Consulting",
+    "Kubernetes CI CD Automation",
+    "Cloud Infrastructure Management",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/devops",
+  },
+  openGraph: {
+    title: "Cloud & DevOps Services | Kalki Web",
+    description: "Automated cloud pipelines, Kubernetes clusters, and zero-downtime infrastructure.",
+    url: "https://www.kalkiweb.in/services/devops",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides for DevOps & Cloud
 const devopsShowcaseSlides = [
   {

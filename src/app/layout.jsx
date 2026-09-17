@@ -79,6 +79,97 @@ export default function RootLayout({ children, }) {
             `,
           }}
         />
+        {/* Schema.org Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": ["Organization", "ProfessionalService"],
+                  "@id": "https://www.kalkiweb.in/#organization",
+                  "name": "Kalki Web",
+                  "alternateName": [
+                    "Kalki Web Solutions",
+                    "Best Digital Marketing Agency India",
+                    "Top-Rated & Most Trusted SEO Company in India"
+                  ],
+                  "url": "https://www.kalkiweb.in",
+                  "logo": "https://www.kalkiweb.in/images%20videos/logo-color-dark-bg.png",
+                  "description": "Kalki Web is the top-rated & most trusted SEO company and digital marketing agency in India, providing expert website development, Google Ads PPC management, and Shopify e-commerce solutions.",
+                  "email": "contact@kalkiweb.in",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "IN"
+                  },
+                  "priceRange": "$$",
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "reviewCount": "128",
+                    "bestRating": "5"
+                  },
+                  "areaServed": [
+                    { "@type": "Country", "name": "India" },
+                    { "@type": "Country", "name": "United States" },
+                    { "@type": "Country", "name": "United Kingdom" },
+                    { "@type": "Country", "name": "United Arab Emirates" },
+                    { "@type": "Country", "name": "Australia" }
+                  ],
+                  "sameAs": [
+                    "https://www.linkedin.com/company/kalkiweb",
+                    "https://www.instagram.com/kalkiweb"
+                  ],
+                  "knowsAbout": [
+                    "Digital Marketing Agency India",
+                    "Best Digital Marketing Agency",
+                    "Digital Marketing Company India",
+                    "SEO Company India",
+                    "Top-Rated & Most Trusted SEO Company in India",
+                    "SEO Services India",
+                    "Best SEO Company",
+                    "Web Design Company India",
+                    "Website Development Company",
+                    "Web Development Agency India",
+                    "Social Media Marketing Agency",
+                    "Google Ads Management",
+                    "PPC Management Services",
+                    "Performance Marketing Agency",
+                    "Online Marketing Agency",
+                    "E-commerce Website Development",
+                    "Shopify Development Company",
+                    "WordPress Development Company",
+                    "Lead Generation Agency",
+                    "Digital Branding Agency",
+                    "Hire Digital Marketing Agency",
+                    "Digital Marketing Services for Business",
+                    "SEO Services for Small Business",
+                    "Affordable Digital Marketing Services",
+                    "Professional SEO Services",
+                    "Google Ads Agency India",
+                    "Social Media Marketing Services",
+                    "Website Development Services India"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.kalkiweb.in/#website",
+                  "url": "https://www.kalkiweb.in",
+                  "name": "Kalki Web",
+                  "publisher": {
+                    "@id": "https://www.kalkiweb.in/#organization"
+                  },
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://www.kalkiweb.in/blog?search={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              ]
+            })
+          }}
+        />
       </head>
       <body className={cn("min-h-screen bg-background font-sans antialiased", poppins.variable, kalam.variable, notoDevanagari.variable, notoBengali.variable, notoGurmukhi.variable, notoJP.variable, notoSC.variable)}>
         <ClientLayout>{children}</ClientLayout>

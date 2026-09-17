@@ -70,6 +70,7 @@ export async function POST(request) {
     const body = await request.json();
     const {
       title,
+      slug: customSlug,
       snippet,
       content,
       category,
@@ -78,6 +79,8 @@ export async function POST(request) {
       tags,
       readTime,
       featured,
+      metaTitle,
+      metaDescription,
     } = body;
 
     if (!title || !snippet || !content) {
@@ -90,8 +93,8 @@ export async function POST(request) {
       );
     }
 
-    // Generate base slug
-    let slug = generateSlug(title);
+    // Generate base slug or use custom
+    let slug = customSlug ? generateSlug(customSlug) : generateSlug(title);
     if (!slug) {
       slug = `post-${Date.now()}`;
     }
@@ -122,6 +125,8 @@ export async function POST(request) {
       title,
       slug,
       snippet,
+      metaTitle: metaTitle || title,
+      metaDescription: metaDescription || snippet,
       content,
       category: category || "Web Development",
       coverImage: coverImage || "/illustrations/team_collaboration.jpg",

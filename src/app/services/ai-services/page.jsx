@@ -13,6 +13,29 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
+export const metadata = {
+  title: "AI & Intelligent Automation Services | Custom LLMs - Kalki Web",
+  description: "Transform business workflows with AI integration, custom LLM solutions, predictive analytics, and conversational agents from Kalki Web.",
+  keywords: [
+    "AI Development Services",
+    "Generative AI Solutions",
+    "Intelligent Automation",
+    "Custom LLM Integration",
+    "Machine Learning Consulting",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/ai-services",
+  },
+  openGraph: {
+    title: "AI & Automation Services | Kalki Web",
+    description: "Custom LLM integrations and enterprise workflow automation.",
+    url: "https://www.kalkiweb.in/services/ai-services",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides for AI Services
 const aiShowcaseSlides = [
   {

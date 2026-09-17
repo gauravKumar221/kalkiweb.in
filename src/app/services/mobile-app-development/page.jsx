@@ -9,6 +9,29 @@ import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 import MobileAppShowcase from "@/components/mobile-app-showcase";
 
+export const metadata = {
+  title: "Mobile App Development Company India | React Native & Flutter - Kalki Web",
+  description: "Premier mobile app development company in India crafting native iOS, Android, and cross-platform React Native & Flutter applications with fluid UX and enterprise security.",
+  keywords: [
+    "Mobile App Development Company India",
+    "React Native App Development",
+    "Flutter App Development",
+    "iOS and Android App Developers",
+    "Cross-Platform Mobile Apps",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/mobile-app-development",
+  },
+  openGraph: {
+    title: "Mobile App Development Company India | Kalki Web",
+    description: "Custom native and cross-platform mobile applications for high-growth enterprises.",
+    url: "https://www.kalkiweb.in/services/mobile-app-development",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides for Mobile App Development
 const mobileShowcaseSlides = [
   {

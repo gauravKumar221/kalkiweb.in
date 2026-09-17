@@ -81,10 +81,16 @@ export default function DashboardLayout({ children }) {
 
   const navItems = [
     {
-      label: "Blog Articles",
-      href: "/dashboard/blog",
+      label: "Posts Manager (/post)",
+      href: "/dashboard/posts",
       icon: FileText,
       badge: "Posts",
+    },
+    {
+      label: "Blog Articles (/blog)",
+      href: "/dashboard/blog",
+      icon: FileText,
+      badge: "Live",
     },
     {
       label: "Kalki Members",

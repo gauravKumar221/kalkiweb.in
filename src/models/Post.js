@@ -22,6 +22,16 @@ const PostSchema = new mongoose.Schema(
       trim: true,
       maxlength: [500, "Snippet cannot exceed 500 characters"],
     },
+    metaTitle: {
+      type: String,
+      trim: true,
+      maxlength: [160, "Meta title cannot exceed 160 characters"],
+    },
+    metaDescription: {
+      type: String,
+      trim: true,
+      maxlength: [300, "Meta description cannot exceed 300 characters"],
+    },
     content: {
       type: String,
       required: [true, "Content is required"],

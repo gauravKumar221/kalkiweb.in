@@ -1,6 +1,29 @@
 import InteractiveServiceList from "@/components/interactive-service-list";
 import ServicesOfferings from "@/components/services-offerings";
 
+export const metadata = {
+  title: "Our Services | Digital Marketing, SEO & Web Development - Kalki Web",
+  description: "Explore the comprehensive services offered by Kalki Web — India's premier digital agency for website development, SEO services, PPC management, and Shopify.",
+  keywords: [
+    "Digital Marketing Services for Business",
+    "Website Development Services India",
+    "SEO Services India",
+    "Shopify Development Company",
+    "Google Ads Agency India",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services",
+  },
+  openGraph: {
+    title: "Our Services | Kalki Web",
+    description: "Full-spectrum digital marketing, website development, and e-commerce solutions.",
+    url: "https://www.kalkiweb.in/services",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">

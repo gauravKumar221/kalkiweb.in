@@ -357,14 +357,22 @@ export default function DashboardBlogPage() {
                         </td>
 
                         <td className="px-5 py-4 text-right">
-                          <div className="flex items-center justify-end gap-2">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <Link
+                              href={`/post/${post.slug}`}
+                              target="_blank"
+                              className="px-2 py-1 text-[11px] font-bold text-blue-600 hover:bg-blue-50 border border-blue-200 rounded transition-colors"
+                              title="View /post/ URL"
+                            >
+                              /post/
+                            </Link>
                             <Link
                               href={`/blog/${post.slug}`}
                               target="_blank"
-                              className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors"
-                              title="View live article"
+                              className="px-2 py-1 text-[11px] font-bold text-purple-600 hover:bg-purple-50 border border-purple-200 rounded transition-colors"
+                              title="View /blog/ URL"
                             >
-                              <ExternalLink className="w-4 h-4" />
+                              /blog/
                             </Link>
 
                             <button

@@ -15,6 +15,30 @@ import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 import ShowcaseMarquee from "@/components/showcase-marquee";
 
+export const metadata = {
+  title: "Web Design Company India | UI/UX & Digital Branding Agency - Kalki Web",
+  description: "Award-winning web design company in India delivering psychology-driven UI/UX design, conversion rate optimization (CRO), and memorable brand identity systems.",
+  keywords: [
+    "Web Design Company India",
+    "Digital Branding Agency",
+    "UI UX Design Agency",
+    "Graphic Design Services",
+    "Conversion Rate Optimization UI",
+    "Brand Identity Design",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/graphic-ui-ux",
+  },
+  openGraph: {
+    title: "Web Design Company India | UI/UX & Branding | Kalki Web",
+    description: "Psychology-backed UI/UX design and premium digital brand identity systems.",
+    url: "https://www.kalkiweb.in/services/graphic-ui-ux",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides (Width 600, Height 500, with optional link or div support)
 const showcaseSlides = [
   {

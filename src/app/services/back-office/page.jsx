@@ -8,6 +8,29 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
+export const metadata = {
+  title: "Back-Office Support & Virtual Operations Services - Kalki Web",
+  description: "Comprehensive back-office management, 24/7 multi-channel customer helpdesk, catalog management, and administrative outsourcing.",
+  keywords: [
+    "Back Office Support Services",
+    "Virtual Assistance Services",
+    "Data Management Outsourcing",
+    "Customer Support Helpdesk",
+    "Business Process Outsourcing",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/back-office",
+  },
+  openGraph: {
+    title: "Back-Office Support Services | Kalki Web",
+    description: "Dedicated 24/7 customer support and back-office management services.",
+    url: "https://www.kalkiweb.in/services/back-office",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides for Back-Office Services
 const backOfficeShowcaseSlides = [
   {

@@ -19,8 +19,31 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 import IndustriesSection from "@/components/industries-section";
 import DigitalGrowthPartner from "@/components/digital-growth-partner";
 import ServiceHero from "@/components/service-hero";
-import ShowcaseImageSlider from "@/components/showcase-image-slider";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
+
+export const metadata = {
+  title: "Website Development Company India | Web Development Agency - Kalki Web",
+  description: "Recognized website development company in India crafting high-performance Next.js web applications, headless CMS architectures, and scalable enterprise web solutions.",
+  keywords: [
+    "Website Development Company",
+    "Web Development Agency India",
+    "Website Development Services India",
+    "Web Design Company India",
+    "Full-Stack Web Development",
+    "Next.js Development Agency",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/web-development",
+  },
+  openGraph: {
+    title: "Website Development Company India | Kalki Web",
+    description: "High-performance Next.js web development, headless CMS, and custom web applications engineered for speed and conversion.",
+    url: "https://www.kalkiweb.in/services/web-development",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
 
 const webDevShowcaseSlides = [
   {

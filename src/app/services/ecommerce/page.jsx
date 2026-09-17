@@ -8,6 +8,29 @@ import DigitalGrowthPartner from "@/components/digital-growth-partner";
 import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
+export const metadata = {
+  title: "E-Commerce Website Development Company India - Kalki Web",
+  description: "Enterprise e-commerce website development engineered for high conversion rates, multi-currency payment gateways, real-time ERP sync, and blazing load times.",
+  keywords: [
+    "E-commerce Website Development",
+    "Online Store Development",
+    "Multi-Vendor Marketplace Development",
+    "Custom E-commerce Solutions",
+    "E-commerce Web Development Agency",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/ecommerce",
+  },
+  openGraph: {
+    title: "E-Commerce Website Development Company India | Kalki Web",
+    description: "Custom enterprise e-commerce platforms engineered for seamless checkout and high conversion velocity.",
+    url: "https://www.kalkiweb.in/services/ecommerce",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 // Showcase Slider Slides for E-Commerce
 const ecommerceShowcaseSlides = [
   {

@@ -9,6 +9,35 @@ import B2BDisruptiveTech from "@/components/b2b-disruptive-tech";
 import ServiceHero from "@/components/service-hero";
 import ServiceFeatureShowcase from "@/components/service-feature-showcase";
 
+export const metadata = {
+  title: "Best Digital Marketing Agency India | Top SEO & PPC Company - Kalki Web",
+  description: "Scale your brand with the best digital marketing agency in India. Top-rated & most trusted SEO company, Google Ads PPC management, and high-converting lead generation.",
+  keywords: [
+    "Digital Marketing Agency India",
+    "Best Digital Marketing Agency",
+    "Digital Marketing Company India",
+    "SEO Company India",
+    "Top-Rated & Most Trusted SEO Company in India",
+    "SEO Services India",
+    "Google Ads Management",
+    "PPC Management Services",
+    "Performance Marketing Agency",
+    "Lead Generation Agency",
+    "Social Media Marketing Agency",
+  ],
+  alternates: {
+    canonical: "https://www.kalkiweb.in/services/digital-marketing",
+  },
+  openGraph: {
+    title: "Best Digital Marketing Agency India | Kalki Web",
+    description: "Scale your revenue with India's top performance marketing agency, delivering expert SEO, Google Ads, and lead generation.",
+    url: "https://www.kalkiweb.in/services/digital-marketing",
+    siteName: "Kalki Web",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
 const digitalMarketingSlides = [
     {
         image: "/Kalkimarketing/ChatGPT Image Jun 25, 2026, 01_06_58 PM 1.png",
