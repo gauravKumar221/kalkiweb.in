@@ -101,7 +101,11 @@ export default function SingleArticlePage() {
   };
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this article? This action cannot be undone.")) {
+    if (
+      !confirm(
+        "Are you sure you want to delete this article? This action cannot be undone.",
+      )
+    ) {
       return;
     }
     try {
@@ -163,9 +167,14 @@ export default function SingleArticlePage() {
       }
 
       if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-        const items = trimmed.split("\n").map((line) => line.replace(/^[-*]\s*/, ""));
+        const items = trimmed
+          .split("\n")
+          .map((line) => line.replace(/^[-*]\s*/, ""));
         return (
-          <ul key={idx} className="my-4 space-y-2 pl-4 list-disc marker:text-[#814df5] text-[#334155]">
+          <ul
+            key={idx}
+            className="my-4 space-y-2 pl-4 list-disc marker:text-[#814df5] text-[#334155]"
+          >
             {items.map((item, i) => (
               <li key={i} className="leading-relaxed">
                 {item}
@@ -181,7 +190,10 @@ export default function SingleArticlePage() {
         const codeBody = codeLines.slice(1, -1).join("\n");
 
         return (
-          <div key={idx} className="my-6 rounded-2xl overflow-hidden border border-neutral-200 bg-[#0f172a] font-mono text-xs sm:text-sm shadow-md">
+          <div
+            key={idx}
+            className="my-6 rounded-2xl overflow-hidden border border-neutral-200 bg-[#0f172a] font-mono text-xs sm:text-sm shadow-md"
+          >
             <div className="bg-[#1e293b] px-4 py-2 text-[11px] text-neutral-400 font-semibold border-b border-neutral-700 uppercase tracking-wider">
               {lang}
             </div>
@@ -193,7 +205,10 @@ export default function SingleArticlePage() {
       }
 
       return (
-        <p key={idx} className="text-base sm:text-[17px] text-[#334155] leading-[1.8] font-normal mb-5">
+        <p
+          key={idx}
+          className="text-base sm:text-[17px] text-[#334155] leading-[1.8] font-normal mb-5"
+        >
           {trimmed}
         </p>
       );
@@ -205,7 +220,9 @@ export default function SingleArticlePage() {
       <div className="min-h-screen bg-white text-neutral-900 pt-40 pb-24 flex items-center justify-center">
         <div className="text-center space-y-3 animate-pulse">
           <div className="w-10 h-10 rounded-full border-2 border-indigo-600 border-t-transparent animate-spin mx-auto" />
-          <p className="text-xs text-neutral-500 font-medium">Loading article details...</p>
+          <p className="text-xs text-neutral-500 font-medium">
+            Loading article details...
+          </p>
         </div>
       </div>
     );
@@ -215,11 +232,16 @@ export default function SingleArticlePage() {
     return (
       <div className="min-h-screen bg-white text-neutral-900 pt-40 pb-24 flex items-center justify-center">
         <div className="text-center max-w-md mx-auto px-4 space-y-4">
-          <h2 className="text-2xl font-bold text-neutral-900">Article Not Found</h2>
+          <h2 className="text-2xl font-bold text-neutral-900">
+            Article Not Found
+          </h2>
           <p className="text-neutral-500 text-xs sm:text-sm">
             This article may have been unpublished or removed.
           </p>
-          <Button asChild className="rounded-full bg-[#0f172a] text-white font-bold text-xs">
+          <Button
+            asChild
+            className="rounded-full bg-[#0f172a] text-white font-bold text-xs"
+          >
             <Link href="/blog">← Back to Articles</Link>
           </Button>
         </div>
@@ -247,7 +269,10 @@ export default function SingleArticlePage() {
           <Link href="/blog" className="hover:text-black transition-colors">
             Blog
           </Link>{" "}
-          / <span className="text-neutral-800 font-semibold">{post.category}</span>
+          /{" "}
+          <span className="text-neutral-800 font-semibold">
+            {post.category}
+          </span>
         </div>
 
         <div className="flex items-center gap-4">
@@ -299,7 +324,10 @@ export default function SingleArticlePage() {
               </div>
               <div className="text-left">
                 <div className="text-sm font-bold text-[#101828] leading-tight">
-                  by <span className="text-[#155dfc]">{post.author?.name || "Tasmin Lofthouse"}</span>
+                  by{" "}
+                  <span className="text-[#155dfc]">
+                    {post.author?.name || "Tasmin Lofthouse"}
+                  </span>
                 </div>
                 <div className="text-xs text-[#475467] leading-tight mt-1">
                   Posted on {formattedDate} • {post.readTime || "5 min read"}
@@ -313,7 +341,9 @@ export default function SingleArticlePage() {
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-[#fedac6] via-[#fcd2bc] to-[#f9be9f] p-4 sm:p-6 shadow-md border border-[#fedac6] flex items-center justify-center">
               <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-sm">
                 <Image
-                  src={post.coverImage || "/illustrations/seo_search_results.jpg"}
+                  src={
+                    post.coverImage || "/illustrations/seo_search_results.jpg"
+                  }
                   alt={post.title}
                   fill
                   unoptimized
@@ -382,7 +412,11 @@ export default function SingleArticlePage() {
                 className="w-10 h-10 rounded-full bg-white hover:bg-neutral-900 border border-neutral-200 hover:border-neutral-900 flex items-center justify-center text-neutral-600 hover:text-white transition-all shadow-xs"
                 title="Copy Link"
               >
-                {copied ? <Check className="w-4 h-4 text-green-600" /> : <LinkIcon className="w-4 h-4" />}
+                {copied ? (
+                  <Check className="w-4 h-4 text-green-600" />
+                ) : (
+                  <LinkIcon className="w-4 h-4" />
+                )}
               </button>
             </div>
           </div>
@@ -395,12 +429,18 @@ export default function SingleArticlePage() {
 
             {/* Mobile Share Row */}
             <div className="lg:hidden pt-8 border-t border-neutral-200 flex items-center gap-3">
-              <span className="text-xs font-bold text-neutral-500 uppercase">Share:</span>
+              <span className="text-xs font-bold text-neutral-500 uppercase">
+                Share:
+              </span>
               <button
                 onClick={handleCopyLink}
                 className="px-3 py-1.5 rounded-full bg-white border border-neutral-200 text-xs text-neutral-800 flex items-center gap-1.5 shadow-xs"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-green-600" /> : <Share2 className="w-3.5 h-3.5" />}
+                {copied ? (
+                  <Check className="w-3.5 h-3.5 text-green-600" />
+                ) : (
+                  <Share2 className="w-3.5 h-3.5" />
+                )}
                 <span>{copied ? "Link Copied!" : "Share Link"}</span>
               </button>
             </div>
