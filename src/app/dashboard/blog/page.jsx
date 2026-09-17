@@ -16,6 +16,7 @@ import {
   Check,
   RefreshCw,
   TrendingUp,
+  Pencil,
 } from "lucide-react";
 
 const presetImages = [
@@ -46,6 +47,7 @@ const categories = [
 
 export default function DashboardBlogPage() {
   const [activeTab, setActiveTab] = useState("list"); // 'list' | 'create'
+  const [editingPost, setEditingPost] = useState(null);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -118,6 +120,45 @@ export default function DashboardBlogPage() {
     }));
   };
 
+  const handleEdit = (post) => {
+    setEditingPost(post);
+    setError("");
+    setSuccessMsg("");
+    setFormData({
+      title: post.title || "",
+      category: post.category || "AI Digital Marketing",
+      snippet: post.snippet || "",
+      content: post.content || "",
+      coverImage: post.coverImage || "/illustrations/seo_search_results.jpg",
+      authorName: post.author?.name || "Gaurav Kumar",
+      authorRole: post.author?.role || "Senior AI Strategist",
+      authorAvatar: post.author?.avatar || "/images videos/gaurav.png",
+      tags: Array.isArray(post.tags) ? post.tags.join(", ") : (post.tags || ""),
+      featured: Boolean(post.featured),
+    });
+    setActiveTab("create");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingPost(null);
+    setError("");
+    setSuccessMsg("");
+    setFormData({
+      title: "",
+      category: "AI Digital Marketing",
+      snippet: "",
+      content: "",
+      coverImage: "/illustrations/seo_search_results.jpg",
+      authorName: "Tasmin Lofthouse",
+      authorRole: "Senior AI Strategist",
+      authorAvatar: "/images videos/gaurav.png",
+      tags: "AI, Marketing, Growth",
+      featured: false,
+    });
+    setActiveTab("list");
+  };
+
   const handleCreatePost = async (e) => {
     e.preventDefault();
     setError("");
@@ -128,10 +169,15 @@ export default function DashboardBlogPage() {
       return;
     }
 
+    const isEditing = Boolean(editingPost);
+    const endpoint = isEditing ? `/api/posts/${editingPost.slug}` : "/api/posts";
+    const method = isEditing ? "PUT" : "POST";
+
     try {
       setSubmitting(true);
 
       const payload = {
+        ...(isEditing ? { _id: editingPost._id } : {}),
         title: formData.title.trim(),
         category: formData.category,
         snippet: formData.snippet.trim(),
@@ -149,8 +195,8 @@ export default function DashboardBlogPage() {
         featured: formData.featured,
       };
 
-      const res = await fetch("/api/posts", {
-        method: "POST",
+      const res = await fetch(endpoint, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
@@ -158,23 +204,11 @@ export default function DashboardBlogPage() {
       const data = await res.json();
 
       if (data.success) {
-        setSuccessMsg(`Article "${formData.title}" published successfully!`);
-        setFormData({
-          title: "",
-          category: "AI Digital Marketing",
-          snippet: "",
-          content: "",
-          coverImage: "/illustrations/seo_search_results.jpg",
-          authorName: "Tasmin Lofthouse",
-          authorRole: "Senior AI Strategist",
-          authorAvatar: "/images videos/gaurav.png",
-          tags: "AI, Marketing, Growth",
-          featured: false,
-        });
+        setSuccessMsg(isEditing ? `Article "${formData.title}" updated successfully!` : `Article "${formData.title}" published successfully!`);
+        handleCancelEdit();
         await fetchPosts();
-        setActiveTab("list");
       } else {
-        setError(data.error || "Failed to publish post.");
+        setError(data.error || `Failed to ${isEditing ? "update" : "publish"} post.`);
       }
     } catch (err) {
       setError("An unexpected error occurred.");
@@ -191,6 +225,9 @@ export default function DashboardBlogPage() {
       const data = await res.json();
       if (data.success) {
         setPosts((prev) => prev.filter((p) => p.slug !== slug));
+        if (editingPost && editingPost.slug === slug) {
+          handleCancelEdit();
+        }
       } else {
         alert(data.error || "Failed to delete post");
       }
@@ -358,6 +395,15 @@ export default function DashboardBlogPage() {
 
                         <td className="px-5 py-4 text-right">
                           <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              onClick={() => handleEdit(post)}
+                              className="px-2.5 py-1 text-xs font-semibold text-purple-700 hover:bg-purple-100 bg-purple-50 border border-purple-200 rounded flex items-center gap-1 transition-colors"
+                              title="Edit this post"
+                            >
+                              <Pencil className="w-3 h-3" />
+                              <span>Edit</span>
+                            </button>
+
                             <Link
                               href={`/post/${post.slug}`}
                               target="_blank"
@@ -587,13 +633,22 @@ export default function DashboardBlogPage() {
               </div>
 
               {/* Publish Button */}
-              <div className="pt-4 border-t border-slate-200">
+              <div className="pt-4 border-t border-slate-200 flex items-center gap-3">
+                {editingPost && (
+                  <button
+                    type="button"
+                    onClick={handleCancelEdit}
+                    className="w-1/3 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                )}
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-2.5 rounded-lg bg-black text-white font-semibold text-sm hover:bg-slate-800 transition-colors shadow-sm disabled:opacity-75"
+                  className={`${editingPost ? "w-2/3" : "w-full"} py-2.5 rounded-lg bg-black text-white font-semibold text-sm hover:bg-slate-800 transition-colors shadow-sm disabled:opacity-75`}
                 >
-                  {submitting ? "Publishing Article..." : "Publish Article"}
+                  {submitting ? (editingPost ? "Updating..." : "Publishing Article...") : (editingPost ? "Update Article & Save" : "Publish Article")}
                 </button>
               </div>
             </div>

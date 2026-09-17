@@ -20,6 +20,8 @@ import {
   Sparkles,
   Globe,
   Share2,
+  Pencil,
+  X,
 } from "lucide-react";
 
 const presetImages = [
@@ -109,6 +111,7 @@ function slugify(text) {
 
 export default function DashboardPostsPage() {
   const [activeTab, setActiveTab] = useState("list"); // 'list' | 'create'
+  const [editingPost, setEditingPost] = useState(null);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -155,6 +158,20 @@ export default function DashboardPostsPage() {
     fetchPosts();
   }, []);
 
+  // Support ?edit=slug query parameter to open edit mode directly
+  useEffect(() => {
+    if (typeof window !== "undefined" && posts.length > 0) {
+      const params = new URLSearchParams(window.location.search);
+      const editSlug = params.get("edit");
+      if (editSlug) {
+        const found = posts.find((p) => p.slug === editSlug);
+        if (found) {
+          handleEdit(found);
+        }
+      }
+    }
+  }, [posts]);
+
   const totalViews = useMemo(() => {
     return posts.reduce((acc, p) => acc + (p.views || 0), 0);
   }, [posts]);
@@ -193,6 +210,53 @@ export default function DashboardPostsPage() {
     });
   };
 
+  // Edit existing article handler
+  const handleEdit = (post) => {
+    setEditingPost(post);
+    setError("");
+    setSuccessMsg("");
+    setFormData({
+      title: post.title || "",
+      slug: post.slug || "",
+      metaTitle: post.metaTitle || post.title || "",
+      metaDescription: post.metaDescription || post.snippet || "",
+      category: post.category || "Search Engine Optimization",
+      snippet: post.snippet || "",
+      content: post.content || "",
+      coverImage: post.coverImage || "/illustrations/seo_search_results.jpg",
+      authorName: post.author?.name || "Gaurav Kumar",
+      authorRole: post.author?.role || "Chief SEO Strategist",
+      authorAvatar: post.author?.avatar || "/images videos/gaurav.png",
+      tags: Array.isArray(post.tags) ? post.tags.join(", ") : (post.tags || ""),
+      featured: Boolean(post.featured),
+    });
+    setActiveTab("create");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Cancel edit mode
+  const handleCancelEdit = () => {
+    setEditingPost(null);
+    setError("");
+    setSuccessMsg("");
+    setFormData({
+      title: "",
+      slug: "",
+      metaTitle: "",
+      metaDescription: "",
+      category: "Search Engine Optimization",
+      snippet: "",
+      content: "",
+      coverImage: "/illustrations/seo_search_results.jpg",
+      authorName: "Gaurav Kumar",
+      authorRole: "Chief SEO Strategist",
+      authorAvatar: "/images videos/gaurav.png",
+      tags: "Top-Rated & Most Trusted SEO Company in India, Best Digital Marketing Agency",
+      featured: false,
+    });
+    setActiveTab("list");
+  };
+
   // Delete article
   const handleDelete = async (slug, title) => {
     if (!confirm(`Are you sure you want to delete "${title}"? This cannot be undone.`)) {
@@ -204,6 +268,9 @@ export default function DashboardPostsPage() {
       const data = await res.json();
       if (data.success) {
         setPosts((prev) => prev.filter((p) => p.slug !== slug));
+        if (editingPost && editingPost.slug === slug) {
+          handleCancelEdit();
+        }
       } else {
         alert(data.error || "Failed to delete post");
       }
@@ -212,15 +279,20 @@ export default function DashboardPostsPage() {
     }
   };
 
-  // Create article submit
+  // Create or Update article submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccessMsg("");
     setSubmitting(true);
 
+    const isEditing = Boolean(editingPost);
+    const endpoint = isEditing ? `/api/posts/${editingPost.slug}` : "/api/posts";
+    const method = isEditing ? "PUT" : "POST";
+
     try {
       const payload = {
+        ...(isEditing ? { _id: editingPost._id } : {}),
         title: formData.title.trim(),
         slug: formData.slug.trim(),
         metaTitle: formData.metaTitle.trim() || formData.title.trim(),
@@ -238,8 +310,8 @@ export default function DashboardPostsPage() {
         },
       };
 
-      const res = await fetch("/api/posts", {
-        method: "POST",
+      const res = await fetch(endpoint, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
@@ -247,9 +319,14 @@ export default function DashboardPostsPage() {
       const data = await res.json();
 
       if (data.success) {
-        const createdSlug = data.data.slug;
-        setLastCreatedSlug(createdSlug);
-        setSuccessMsg(`Post successfully published! Live at /post/${createdSlug} and /blog/${createdSlug}`);
+        const resultSlug = data.data.slug || formData.slug;
+        setLastCreatedSlug(resultSlug);
+        setSuccessMsg(
+          isEditing
+            ? `Post "${formData.title}" updated successfully! Live at /post/${resultSlug}`
+            : `Post successfully published! Live at /post/${resultSlug} and /blog/${resultSlug}`
+        );
+        setEditingPost(null);
         setFormData({
           title: "",
           slug: "",
@@ -266,11 +343,12 @@ export default function DashboardPostsPage() {
           featured: false,
         });
         fetchPosts();
+        setActiveTab("list");
       } else {
-        setError(data.error || "Failed to create post.");
+        setError(data.error || `Failed to ${isEditing ? "update" : "create"} post.`);
       }
     } catch (err) {
-      setError("Network error while creating post.");
+      setError(`Network error while ${isEditing ? "updating" : "creating"} post.`);
     } finally {
       setSubmitting(false);
     }
@@ -296,6 +374,7 @@ export default function DashboardPostsPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => {
+              if (editingPost) handleCancelEdit();
               setActiveTab("list");
               fetchPosts();
             }}
@@ -309,15 +388,22 @@ export default function DashboardPostsPage() {
             <span>All Posts ({posts.length})</span>
           </button>
           <button
-            onClick={() => setActiveTab("create")}
+            onClick={() => {
+              if (editingPost) {
+                setActiveTab("create");
+              } else {
+                handleCancelEdit();
+                setActiveTab("create");
+              }
+            }}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold border transition-all ${
               activeTab === "create"
                 ? "bg-[#814df5] text-white border-[#814df5] shadow-sm"
                 : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
             }`}
           >
-            <Plus className="w-4 h-4" />
-            <span>Create New Post</span>
+            {editingPost ? <Pencil className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+            <span>{editingPost ? "Edit Post" : "Create New Post"}</span>
           </button>
         </div>
       </div>
@@ -505,6 +591,14 @@ export default function DashboardPostsPage() {
 
                       <td className="py-3.5 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => handleEdit(post)}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-purple-700 bg-purple-50 border border-purple-200 hover:bg-purple-100 rounded-md transition-colors"
+                            title="Edit this post"
+                          >
+                            <Pencil className="w-3.5 h-3.5" />
+                            <span>Edit</span>
+                          </button>
                           <button
                             onClick={() => handleDelete(post.slug, post.title)}
                             className="p-1.5 text-slate-400 hover:text-red-600 rounded-md hover:bg-red-50 transition-colors"
@@ -839,7 +933,7 @@ export default function DashboardPostsPage() {
             <div className="flex items-center justify-between pt-4 border-t border-slate-100">
               <button
                 type="button"
-                onClick={() => setActiveTab("list")}
+                onClick={handleCancelEdit}
                 className="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-900"
               >
                 Cancel
@@ -853,12 +947,12 @@ export default function DashboardPostsPage() {
                 {submitting ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>Publishing to MongoDB...</span>
+                    <span>{editingPost ? "Updating in MongoDB..." : "Publishing to MongoDB..."}</span>
                   </>
                 ) : (
                   <>
                     <Check className="w-4 h-4" />
-                    <span>Publish Article Live</span>
+                    <span>{editingPost ? "Update Post & Save Changes" : "Publish Article Live"}</span>
                   </>
                 )}
               </button>

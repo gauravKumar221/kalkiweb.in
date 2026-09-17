@@ -258,7 +258,7 @@ export default function DashboardLayout({ children }) {
       </aside>
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-1 p-4 sm:p-8 lg:p-10 max-w-7xl overflow-x-hidden">
+      <main className="flex-1 min-w-0 w-full p-4 sm:p-6 lg:p-8">
         {children}
       </main>
     </div>

@@ -57,10 +57,27 @@ export async function PUT(request, { params }) {
     const { slug } = resolvedParams;
     const body = await request.json();
 
-    const post = await Post.findOneAndUpdate({ slug }, body, {
-      new: true,
-      runValidators: true,
-    });
+    if (body.tags && typeof body.tags === "string") {
+      body.tags = body.tags
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean);
+    }
+
+    let post = null;
+    if (body._id || body.id) {
+      post = await Post.findByIdAndUpdate(body._id || body.id, body, {
+        new: true,
+        runValidators: true,
+      });
+    }
+
+    if (!post) {
+      post = await Post.findOneAndUpdate({ slug }, body, {
+        new: true,
+        runValidators: true,
+      });
+    }
 
     if (!post) {
       return NextResponse.json(

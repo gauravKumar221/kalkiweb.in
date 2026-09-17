@@ -20,6 +20,7 @@ import {
   Facebook,
   Link as LinkIcon,
   LayoutDashboard,
+  Pencil,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -275,7 +276,29 @@ export default function SingleArticlePage() {
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          {adminUser && (
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/dashboard/posts?edit=${post.slug}`}
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 transition-colors flex items-center gap-1.5"
+                title="Edit this post in Posts Manager"
+              >
+                <Pencil className="w-3.5 h-3.5" />
+                <span>Edit Post</span>
+              </Link>
+              <button
+                onClick={handleDelete}
+                disabled={deleting}
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 transition-colors flex items-center gap-1.5 disabled:opacity-50"
+                title="Delete this post"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>{deleting ? "Deleting..." : "Delete"}</span>
+              </button>
+            </div>
+          )}
+
           <Link
             href="/blog"
             className="text-xs sm:text-sm font-bold text-[#155dfc] hover:text-black transition-colors flex items-center gap-1.5"

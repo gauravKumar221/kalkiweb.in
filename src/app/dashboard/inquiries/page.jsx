@@ -153,22 +153,22 @@ export default function DashboardInquiriesPage() {
   return (
     <div className="space-y-6 text-left font-sans">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
-        <div>
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div className="max-w-xl">
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
             Contact Inquiries & Leads
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
             Real-time submissions from Contact Us forms, synced with MongoDB, Excel, and Google Sheets.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
           <a
             href="https://docs.google.com/spreadsheets/d/1iW7pt5VYZKivevZQB7aDrOnuI9YNSR3wnKDc572AR7M/edit?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-200 bg-emerald-50 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-emerald-200 bg-emerald-50 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 transition-colors shadow-sm whitespace-nowrap"
           >
             <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
             <span>Open Google Sheet</span>
@@ -177,7 +177,7 @@ export default function DashboardInquiriesPage() {
 
           <button
             onClick={exportToExcel}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm whitespace-nowrap"
             title="Download CSV for Excel"
           >
             <Download className="w-3.5 h-3.5 text-slate-500" />
@@ -186,7 +186,7 @@ export default function DashboardInquiriesPage() {
 
           <button
             onClick={fetchInquiries}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-sm whitespace-nowrap"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? "animate-spin" : ""}`} />
             <span>Refresh</span>
@@ -195,39 +195,39 @@ export default function DashboardInquiriesPage() {
       </div>
 
       {/* Metrics Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-sm min-w-0">
+          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider truncate">
             Total Inquiries
           </div>
-          <div className="text-3xl font-bold text-slate-900 mt-2">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">
             {inquiries.length}
           </div>
-          <div className="text-xs text-slate-400 mt-1">
+          <div className="text-xs text-slate-400 mt-1 truncate">
             All-time submissions in database
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+        <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-sm min-w-0">
+          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider truncate">
             New / Uncontacted
           </div>
-          <div className="text-3xl font-bold text-slate-900 mt-2">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">
             {newCount}
           </div>
-          <div className="text-xs text-slate-500 mt-1">
+          <div className="text-xs text-slate-500 mt-1 truncate">
             Pending response from team
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+        <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-sm min-w-0 sm:col-span-2 lg:col-span-1">
+          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider truncate">
             Contacted & Resolved
           </div>
-          <div className="text-3xl font-bold text-slate-900 mt-2">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">
             {contactedCount}
           </div>
-          <div className="text-xs text-slate-400 mt-1">
+          <div className="text-xs text-slate-400 mt-1 truncate">
             Marked as contacted
           </div>
         </div>
@@ -269,7 +269,7 @@ export default function DashboardInquiriesPage() {
       </div>
 
       {/* Data Table */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div className="w-full bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
         {loading ? (
           <div className="py-16 text-center text-slate-500 text-sm">
             <div className="w-6 h-6 border-2 border-slate-900 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
@@ -281,8 +281,8 @@ export default function DashboardInquiriesPage() {
             No inquiries match your filter.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+          <div className="w-full overflow-x-auto">
+            <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 text-xs uppercase tracking-wider font-semibold">
                 <tr>
                   <th className="px-5 py-3.5">Name</th>
